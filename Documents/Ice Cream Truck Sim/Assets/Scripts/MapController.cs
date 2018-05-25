@@ -100,22 +100,101 @@ public class MapController : MonoBehaviour
 		//find center tile, compare x and y to truckTile
 		Vector2 mapCenter = GetMapCenter();
 
+		//ToDo: Figure out why moving a tile will always mean the truck is offset from the center by x AND y
+
+		List<MapTile> column = mapTiles.FindAll(x => x.MapPos.x == truckTile.MapPos.x);
 		if (truckTile.MapPos.x > mapCenter.x)
 		{
-			Debug.Log("truck is right of?! center");
+			Debug.Log("truck is above?! center");
+
+			//Find the current right edge and calculate where the tile should move to.
+			MapTile edge = mapTiles.Find(x => x.MapPos.x == mapWidth - 1); //Just find the first one, they all have the same x.
+			float nextTileZ = edge.WorldPos.z;
+			nextTileZ += edge.transform.localScale.z;
+
+			for (int i = 0; i < mapTiles.Count; i++)
+			{
+				Vector2 mapPos = mapTiles[i].MapPos;
+				mapTiles[i].MapPos = new Vector2(mapPos.x - 1, mapPos.y);
+			}
+
+			List<MapTile> rowToMove = mapTiles.FindAll(x => x.MapPos.x == -1);
+			foreach (MapTile m in rowToMove)
+			{
+				//keep y(z in world space?) the same, move x to map pos of x the highest world x + x offset
+				m.WorldPos =  new Vector3(m.WorldPos.x, 0f, nextTileZ);
+				m.MapPos = new Vector2(mapWidth - 1, m.MapPos.y);
+			}
 		}
 		else if (truckTile.MapPos.x < mapCenter.x)
 		{
-			Debug.Log("truck is left of?! center");
+			Debug.Log("truck is below?! center");
+
+			//Find the current right edge and calculate where the tile should move to.
+			MapTile edge = mapTiles.Find(x => x.MapPos.x == 0); //Just find the first one, they all have the same x.
+			float nextTileZ = edge.WorldPos.z;
+			nextTileZ -= edge.transform.localScale.z;
+			
+			for (int i = 0; i < mapTiles.Count; i++)
+			{
+				Vector2 mapPos = mapTiles[i].MapPos;
+				mapTiles[i].MapPos = new Vector2(mapPos.x + 1, mapPos.y);
+			}
+
+			List<MapTile> rowToMove = mapTiles.FindAll(x => x.MapPos.x == mapWidth);
+			foreach (MapTile m in rowToMove)
+			{
+				//keep y(z in world space?) the same, move x to map pos of x the highest world x + x offset
+				m.WorldPos =  new Vector3(m.WorldPos.x, 0f, nextTileZ);
+				m.MapPos = new Vector2(0, m.MapPos.y);
+			}
 		}
 
 		if (truckTile.MapPos.y > mapCenter.y)
 		{
-			Debug.Log("truck is above?! center");
+			Debug.Log("truck is right of?! center");
+
+			//Find the current right edge and calculate where the tile should move to.
+			MapTile edge = mapTiles.Find(x => x.MapPos.y == mapHeight - 1); //Just find the first one, they all have the same x.
+			float nextTileX = edge.WorldPos.x;
+			nextTileX += edge.transform.localScale.x;
+
+			for (int i = 0; i < mapTiles.Count; i++)
+			{
+				Vector2 mapPos = mapTiles[i].MapPos;
+				mapTiles[i].MapPos = new Vector2(mapPos.x, mapPos.y - 1);
+			}
+
+			List<MapTile> columnToMove = mapTiles.FindAll(x => x.MapPos.y == -1);
+			foreach (MapTile m in columnToMove)
+			{
+				//keep y(z in world space?) the same, move x to map pos of x the highest world x + x offset
+				m.WorldPos =  new Vector3(nextTileX, 0f, m.WorldPos.z);
+				m.MapPos = new Vector2(m.MapPos.x, mapHeight - 1);
+			}
 		}
 		else if (truckTile.MapPos.y < mapCenter.y)
 		{
-			Debug.Log("truck is below?! center");
+			Debug.Log("truck is left of?! center");
+
+			//Find the current right edge and calculate where the tile should move to.
+			MapTile edge = mapTiles.Find(x => x.MapPos.y == 0); //Just find the first one, they all have the same x.
+			float nextTileX = edge.WorldPos.x;
+			nextTileX -= edge.transform.localScale.x;
+
+			for (int i = 0; i < mapTiles.Count; i++)
+			{
+				Vector2 mapPos = mapTiles[i].MapPos;
+				mapTiles[i].MapPos = new Vector2(mapPos.x, mapPos.y + 1);
+			}
+
+			List<MapTile> columnToMove = mapTiles.FindAll(x => x.MapPos.y == mapHeight);
+			foreach (MapTile m in columnToMove)
+			{
+				//keep y(z in world space?) the same, move x to map pos of x the highest world x + x offset
+				m.WorldPos =  new Vector3(nextTileX, 0f, m.WorldPos.z);
+				m.MapPos = new Vector2(m.MapPos.x, 0);
+			}
 		}
 
 		//we should always be within 1 of the center (3 in this case) because we update every tile move(?)
@@ -138,13 +217,6 @@ public class MapController : MonoBehaviour
 		//1 moves "up"
 		//bottom corners (or whole row?) recycled to make tiles in front
 		//player should be able to see 2 rows ahead (geometry of model to prevent farther? haze? enourmous tiles?)
-	}
-
-	void UpdateTile(MapTile tile, Vector3 position)
-	{
-		//ToDo: randomize the tile's prefab
-		//Move the tile to the correct new position (based on direction player is moving in ??)
-		tile.WorldPos = position;
 	}
 
 	Vector2 GetMapCenter()
