@@ -6,8 +6,8 @@ public class MapController : MonoBehaviour
 {
 	public List<GameObject> prefabs;
 
-	int mapWidth = 5;
-	int mapHeight = 5;
+	int mapWidth = 7;
+	int mapHeight = 7;
 	List<MapTile> mapTiles; //object pool (should we use an array? size is static.)
 
 	static MapController instance;
