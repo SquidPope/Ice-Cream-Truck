@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public class TruckController : MonoBehaviour
 {
 
 	new Rigidbody rigidbody;
+	AudioSource audioSource;
+
 	float vel = 0;
 	float acceleration = 0.01f;
 	float maxSpeed = 20f;
@@ -43,7 +46,9 @@ public class TruckController : MonoBehaviour
 
 	void Start()
 	{
-		rigidbody = gameObject.GetComponent<Rigidbody>();	
+		rigidbody = gameObject.GetComponent<Rigidbody>();
+		audioSource = gameObject.GetComponent<AudioSource>();
+		audioSource.Pause();
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -101,6 +106,18 @@ public class TruckController : MonoBehaviour
 			}
 
 			rigidbody.velocity = transform.forward * vel;
+		}
+
+		if (Input.GetMouseButtonUp(0))
+		{
+			if (audioSource.isPlaying)
+			{
+				audioSource.Pause();
+			}
+			else
+			{
+				audioSource.UnPause();
+			}
 		}
 	}
 }
