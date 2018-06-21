@@ -44,6 +44,11 @@ public class TruckController : MonoBehaviour
 		get { return currentTile.GetComponent<MapTile>(); }
 	}
 
+	public float Velocity
+	{
+		get { return vel; }
+	}
+
 	void Start()
 	{
 		rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -54,6 +59,12 @@ public class TruckController : MonoBehaviour
 	void OnCollisionEnter(Collision other)
 	{
 		//ToDo: make sure walls don't count for this when we have them
+		if (other.gameObject.tag == "Follower")
+		{
+			//ToDo: something, idk
+			return;
+		}
+
 		currentTile = other.gameObject;
 		MapController.Instance.UpdateMap();
 	}

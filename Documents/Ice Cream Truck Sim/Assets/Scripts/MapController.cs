@@ -6,8 +6,8 @@ public class MapController : MonoBehaviour
 {
 	public List<GameObject> prefabs;
 
-	int mapWidth = 7;
-	int mapHeight = 7;
+	public int mapWidth = 7;
+	public int mapHeight = 7;
 	List<MapTile> mapTiles; //object pool (should we use an array? size is static.)
 
 	static MapController instance;
@@ -39,6 +39,12 @@ public class MapController : MonoBehaviour
 
 	void GenerateMap()
 	{
+		if (mapHeight < 2)
+			mapHeight = 2;
+
+		if (mapWidth  < 2)
+			mapWidth = 2;
+
 		float tileX = 0f;
 		float tileZ = 0f;
 
@@ -69,7 +75,6 @@ public class MapController : MonoBehaviour
 				}
 				
 				GameObject tile = GameObject.Instantiate(prefab, new Vector3(tileX, 0f, tileZ), Quaternion.identity);
-				tile.name = "tile " + i + " - " + j;
 				MapTile mapTile = tile.AddComponent<MapTile>();
 				mapTile.MapPos = new Vector2(i, j);
 				mapTiles.Add(mapTile);

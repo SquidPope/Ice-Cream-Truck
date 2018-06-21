@@ -9,7 +9,11 @@ public class MapTile : MonoBehaviour
 	public Vector2 MapPos
 	{
 		get { return mapPos; }
-		set{ mapPos = value; }
+		set
+		{
+			mapPos = value;
+			gameObject.name = "tile " + mapPos;
+		}
 	}
 
 	public Vector3 WorldPos
