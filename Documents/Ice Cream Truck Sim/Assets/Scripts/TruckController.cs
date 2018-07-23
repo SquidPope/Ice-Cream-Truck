@@ -49,6 +49,11 @@ public class TruckController : MonoBehaviour
 		get { return vel; }
 	}
 
+	public float Acceleration
+	{
+		get { return acceleration; }
+	}
+
 	void Start()
 	{
 		rigidbody = gameObject.GetComponent<Rigidbody>();

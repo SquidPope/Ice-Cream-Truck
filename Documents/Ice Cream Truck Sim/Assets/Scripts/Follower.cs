@@ -7,19 +7,30 @@ public class Follower : MonoBehaviour
 {
 	new Rigidbody rigidbody;
 
+	float followDist = 1f;
+
 	void Start()
 	{
 		rigidbody = gameObject.GetComponent<Rigidbody>();
+		followDist = TruckController.Instance.transform.localScale.z * 3f; //Always stay three car lengths behind the car in front of you!
 	}
 	
 	void Update()
 	{
-		//move to a certain distance behind TruckController
-		//gameObject.transform.rotation = TruckController.Instance.Rotation;
+		//ToDo: move away from the player truck if it gets too close?
 
 		float vel = TruckController.Instance.Velocity;
 		gameObject.transform.LookAt(TruckController.Instance.transform);
 
-		rigidbody.velocity = transform.forward * vel;
+		//ToDo: Slow to stop, and then reverse when player gets too close
+		if (Vector3.Distance(TruckController.Instance.transform.position, transform.position) <= followDist)
+		{
+			Debug.Log("close!");
+			rigidbody.velocity = -transform.forward * 10f;//(TruckController.Instance.Acceleration * 10f);
+		}
+		else
+		{
+			rigidbody.velocity = transform.forward * vel;
+		}	
 	}
 }
