@@ -17,7 +17,7 @@ public class Follower : MonoBehaviour
 	
 	void Update()
 	{
-		//ToDo: move away from the player truck if it gets too close?
+		//ToDo: AI to path around obstacles? or just despawn?
 
 		float vel = TruckController.Instance.Velocity;
 		gameObject.transform.LookAt(TruckController.Instance.transform);

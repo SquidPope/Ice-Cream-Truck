@@ -7,6 +7,7 @@ using UnityEngine;
 public class TruckController : MonoBehaviour
 {
 
+	//ToDo: when we hit something (building, etc.) set velocity to 0 so it's easier to back up
 	new Rigidbody rigidbody;
 	AudioSource audioSource;
 
@@ -69,8 +70,16 @@ public class TruckController : MonoBehaviour
 			//ToDo: something, idk
 			return;
 		}
-
-		currentTile = other.gameObject;
+		else if (other.gameObject.tag == "Tile")
+		{
+			currentTile = other.gameObject;
+		}
+		else
+		{
+			//We hit a building or something.
+			vel = 0;
+		}
+		
 		MapController.Instance.UpdateMap();
 	}
 

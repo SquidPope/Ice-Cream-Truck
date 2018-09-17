@@ -233,12 +233,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 338572288}
-  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 10, z: -10}
-  m_LocalScale: {x: 0.6666667, y: 0.7262025, z: 1.4106975}
+  m_LocalRotation: {x: 0.17364816, y: -0, z: -0, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6666667, y: 0.7686772, z: 2.033536}
   m_Children: []
-  m_Father: {fileID: 370395270}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!1 &370395265
 GameObject:
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 370395266}
   - component: {fileID: 370395271}
   - component: {fileID: 370395272}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Truck
   m_TagString: Truck
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 2.63, z: -19.73}
   m_LocalScale: {x: 1, y: 1, z: 1.5}
   m_Children:
-  - {fileID: 338572292}
+  - {fileID: 1754270092}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -651,3 +651,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50715e5b8dd96e34e8bbef63bae0ab7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1754270091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1754270092}
+  m_Layer: 2
+  m_Name: targetLookAt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1754270092
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1754270091}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 370395270}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
