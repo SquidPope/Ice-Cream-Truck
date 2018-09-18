@@ -64,7 +64,6 @@ public class TruckController : MonoBehaviour
 
 	void OnCollisionEnter(Collision other)
 	{
-		//ToDo: make sure walls don't count for this when we have them
 		if (other.gameObject.tag == "Follower")
 		{
 			//ToDo: something, idk
@@ -77,13 +76,15 @@ public class TruckController : MonoBehaviour
 		else
 		{
 			//We hit a building or something.
+			//ToDo: As long as we are still hitting a building or something, don't accelerate into it.
 			vel = 0;
+			rigidbody.velocity = Vector3.zero;
 		}
 		
 		MapController.Instance.UpdateMap();
 	}
 
-	void Update() 
+	void FixedUpdate() 
 	{
 		//ToDo: slight deceleration if no button is down?
 		if (Input.GetKey(KeyCode.W))
@@ -93,8 +94,7 @@ public class TruckController : MonoBehaviour
 		}
 		else if (Input.GetKey(KeyCode.S)) //if s slow down (does that work if w is pressed too?)
 		{
-			//if force is < 10, set to 0?
-			//rigidbody.AddForce(-10f, 0f, 0f);
+			//ToDo: Set a lower speed limit on backing up.
 			if (vel > acceleration)
 			{
 				vel -= acceleration;
@@ -104,20 +104,28 @@ public class TruckController : MonoBehaviour
 			{
 				vel = 0;
 				rigidbody.velocity = Vector3.zero;
-			}	
+			}
+			else
+			{
+				//Reverse
+				vel -= acceleration;
+				rigidbody.velocity = transform.forward * vel;
+			}
 		}
 		else
 		{
 			//Slow to a gradual stop if we're not hitting the gas.
 			if (vel > 0)
 				vel -= idleDecrease;
+			else if (vel < 0)
+				vel += idleDecrease;
 
 			//if we idled below 0 (idleLimit?) set to 0
-			if (vel < 0)
-				vel = 0;
+			//if (vel < 0)
+			//	vel = 0;
 		}
 
-		if (vel > 0) //ToDo: reverse?
+		if (vel != 0) //ToDo: reverse?
 		{
 			if (Input.GetKey(KeyCode.A))
 			{

@@ -220,7 +220,7 @@ public class ThirdPersonCamera : MonoBehaviour
 		transform.LookAt(targetLookAt);
 	}
 
-	void LateUpdate()
+	void FixedUpdate()
 	{
 		if (targetLookAt == null)
 			return;
