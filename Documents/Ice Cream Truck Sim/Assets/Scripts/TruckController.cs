@@ -6,16 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class TruckController : MonoBehaviour
 {
-
-	//ToDo: when we hit something (building, etc.) set velocity to 0 so it's easier to back up
 	new Rigidbody rigidbody;
 	AudioSource audioSource;
 
 	float vel = 0;
-	float acceleration = 0.01f;
+	float acceleration = 0.1f; //ToDo: acceleration should increase the longer the same button (w or s) is held, up to a max.
 	float maxSpeed = 20f;
 	float turnRate = 2f;
-	float idleDecrease = 0.001f;
+	float idleDecrease = 0.01f;
 
 	GameObject currentTile;
 
@@ -91,25 +89,36 @@ public class TruckController : MonoBehaviour
 		{
 			if (vel < maxSpeed)
 				vel += acceleration;
+
+			//ToDo: Slow down if we have been moving backwards.
 		}
 		else if (Input.GetKey(KeyCode.S)) //if s slow down (does that work if w is pressed too?)
 		{
 			//ToDo: Set a lower speed limit on backing up.
 			if (vel > acceleration)
 			{
+				//Slow down.
 				vel -= acceleration;
-				rigidbody.velocity = transform.forward * vel;
 			}
 			else if (vel > 0)
 			{
+				//If we are really close to a full stop, just stop.
+				vel = 0;
+				rigidbody.velocity = Vector3.zero;
+			}
+			else if (vel > -acceleration)
+			{
+				//If we are really close to a full stop, just stop.
 				vel = 0;
 				rigidbody.velocity = Vector3.zero;
 			}
 			else
 			{
 				//Reverse
-				vel -= acceleration;
-				rigidbody.velocity = transform.forward * vel;
+				if (vel > -maxSpeed) //ToDo: have a different max speed for reverse?
+				{
+					vel -= acceleration;
+				}
 			}
 		}
 		else
@@ -120,21 +129,23 @@ public class TruckController : MonoBehaviour
 			else if (vel < 0)
 				vel += idleDecrease;
 
-			//if we idled below 0 (idleLimit?) set to 0
-			//if (vel < 0)
-			//	vel = 0;
+			if (vel < acceleration && vel > -acceleration)
+			{
+				//If we're really close to a full stop, just stop.
+				vel = 0;
+			}
 		}
 
-		if (vel != 0) //ToDo: reverse?
+		if (vel != 0)
 		{
 			if (Input.GetKey(KeyCode.A))
 			{
-				//move forward and turn left
+				//move forward or backward and turn left
 				transform.Rotate(new Vector3(0f, -turnRate, 0f), Space.Self);
 			}
 			else if (Input.GetKey(KeyCode.D))
 			{
-				//move forward and turn right
+				//move forward or backward and turn right
 				transform.Rotate(new Vector3(0f, turnRate, 0f));
 			}
 

@@ -4,15 +4,72 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+	public int score = 0;
+	public float timeLimit; //In seconds
+	public float timeLeft;
+	bool truckInZone = false;
+	bool hasSoldIceCream = false;
+
+	static GameController instance;
+	public static GameController Instance
+	{
+		get
+		{
+			if (instance == null)
+			{
+				GameObject go = GameObject.FindGameObjectWithTag("GameController");
+				instance = go.GetComponent<GameController>();
+			}
+
+			return instance;
+		}
+	}
+
+	public bool TruckInZone
+	{
+		get { return truckInZone; }
+		set
+		{
+			if (!value)
+			{
+				hasSoldIceCream = false;
+			}
+			
+			truckInZone = value;
+		}
+	}
 
 	void Awake() 
 	{
 		ThirdPersonCamera.UseExistingOrCreateMainCamera();
+		UIController.Instance.UpdateUI();
+		timeLeft = timeLimit;
 	}
 	
 	// Update is called once per frame
 	void Update() 
 	{
-		
+		//if we aren't paused
+		timeLeft -= Time.deltaTime;
+		if (timeLeft <= 0)
+		{
+			//Game Over
+		}
+
+		if (truckInZone)
+		{
+			if (TruckController.Instance.Velocity == 0)
+			{
+				//Display UI "Press Space to sell ice cream"
+				if (Input.GetKeyDown(KeyCode.Space))
+				{
+					//Fill a bar slowly, give point when full.
+					score++;
+					hasSoldIceCream = true;
+				}
+			}
+		}
+
+		UIController.Instance.UpdateUI();
 	}
 }
