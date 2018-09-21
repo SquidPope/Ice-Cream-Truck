@@ -10,8 +10,9 @@ public class UIController : MonoBehaviour
 	public Text timeDisplay;
 	public Image helpPanel;
 	public Text helpDisplay;
+	public Slider iceCreamSaleProgress;
+
 	string iceCreamHelp = "Press SPACE to sell Ice Cream!";
-	
 	string scoreText = "Score: ";
 
 	static UIController instance;
@@ -27,6 +28,15 @@ public class UIController : MonoBehaviour
 
 			return instance;
 		}
+	}
+
+	void Start()
+	{
+		iceCreamSaleProgress.maxValue = GameController.Instance.iceCreamDelay;
+
+		//Force the Slider's max value to be greater than 0.
+		if (iceCreamSaleProgress.maxValue <= 0f)
+			iceCreamSaleProgress.maxValue = 1f;
 	}
 
 	public void ToggleHelpPanel(bool isOn)
@@ -56,5 +66,13 @@ public class UIController : MonoBehaviour
 		}
 
 		timeDisplay.text = minutes + ":" + seconds.ToString("#.00");
+
+		if (Input.GetKeyDown(KeyCode.Space))
+			iceCreamSaleProgress.enabled = true;
+
+		if (Input.GetKeyUp(KeyCode.Space))
+			iceCreamSaleProgress.enabled = false;
+
+		iceCreamSaleProgress.value = GameController.Instance.iceCreamProgress;
 	}
 }

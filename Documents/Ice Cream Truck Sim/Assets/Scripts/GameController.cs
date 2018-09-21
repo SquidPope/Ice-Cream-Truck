@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
 	public int score = 0;
 	public float timeLimit; //In seconds
 	public float timeLeft;
+	public float iceCreamDelay; //Also in seconds
+	public float iceCreamProgress = 0f;
 	bool truckInZone = false;
 	bool hasSoldIceCream = false;
 
@@ -61,11 +63,25 @@ public class GameController : MonoBehaviour
 			if (TruckController.Instance.Velocity == 0)
 			{
 				//Display UI "Press Space to sell ice cream"
-				if (Input.GetKeyDown(KeyCode.Space))
+				if (Input.GetKey(KeyCode.Space))
 				{
-					//Fill a bar slowly, give point when full.
-					score++;
-					hasSoldIceCream = true;
+					if (!hasSoldIceCream)
+					{
+						iceCreamProgress += Time.deltaTime;
+
+						//Fill a bar slowly, give point when full.
+						if (iceCreamProgress >= iceCreamDelay)
+						{
+							score++;
+							hasSoldIceCream = true;
+							//ToDo:Make iceCreamDelay longer every time.
+						}
+					}
+				}
+
+				if (Input.GetKeyUp(KeyCode.Space))
+				{
+					iceCreamProgress = 0f;
 				}
 			}
 		}
