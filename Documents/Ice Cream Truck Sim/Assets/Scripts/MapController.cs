@@ -111,8 +111,6 @@ public class MapController : MonoBehaviour
 		List<MapTile> column = mapTiles.FindAll(x => x.MapPos.x == truckTile.MapPos.x);
 		if (truckTile.MapPos.x > mapCenter.x)
 		{
-			Debug.Log("truck is above?! center");
-
 			//Find the current right edge and calculate where the tile should move to.
 			MapTile edge = mapTiles.Find(x => x.MapPos.x == mapWidth - 1); //Just find the first one, they all have the same x.
 			float nextTileZ = edge.WorldPos.z;
@@ -134,8 +132,6 @@ public class MapController : MonoBehaviour
 		}
 		else if (truckTile.MapPos.x < mapCenter.x)
 		{
-			Debug.Log("truck is below?! center");
-
 			//Find the current right edge and calculate where the tile should move to.
 			MapTile edge = mapTiles.Find(x => x.MapPos.x == 0); //Just find the first one, they all have the same x.
 			float nextTileZ = edge.WorldPos.z;
@@ -158,8 +154,6 @@ public class MapController : MonoBehaviour
 
 		if (truckTile.MapPos.y > mapCenter.y)
 		{
-			Debug.Log("truck is right of?! center");
-
 			//Find the current right edge and calculate where the tile should move to.
 			MapTile edge = mapTiles.Find(x => x.MapPos.y == mapHeight - 1); //Just find the first one, they all have the same x.
 			float nextTileX = edge.WorldPos.x;
@@ -181,8 +175,6 @@ public class MapController : MonoBehaviour
 		}
 		else if (truckTile.MapPos.y < mapCenter.y)
 		{
-			Debug.Log("truck is left of?! center");
-
 			//Find the current right edge and calculate where the tile should move to.
 			MapTile edge = mapTiles.Find(x => x.MapPos.y == 0); //Just find the first one, they all have the same x.
 			float nextTileX = edge.WorldPos.x;

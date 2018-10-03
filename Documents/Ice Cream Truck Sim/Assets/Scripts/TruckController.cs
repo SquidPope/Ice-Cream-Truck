@@ -53,6 +53,11 @@ public class TruckController : MonoBehaviour
 		get { return acceleration; }
 	}
 
+	public bool IsMusicPlaying
+	{
+		get { return audioSource.isPlaying; }
+	}
+
 	void Start()
 	{
 		rigidbody = gameObject.GetComponent<Rigidbody>();

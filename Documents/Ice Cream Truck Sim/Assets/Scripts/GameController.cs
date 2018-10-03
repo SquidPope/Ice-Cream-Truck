@@ -75,6 +75,7 @@ public class GameController : MonoBehaviour
 							score++;
 							hasSoldIceCream = true;
 							//ToDo:Make iceCreamDelay longer every time.
+							iceCreamProgress = 0f;
 						}
 					}
 				}

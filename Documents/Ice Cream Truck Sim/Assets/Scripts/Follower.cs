@@ -25,7 +25,6 @@ public class Follower : MonoBehaviour
 		//ToDo: Slow to stop, and then reverse when player gets too close
 		if (Vector3.Distance(TruckController.Instance.transform.position, transform.position) <= followDist)
 		{
-			Debug.Log("close!");
 			rigidbody.velocity = -transform.forward * 10f;//(TruckController.Instance.Acceleration * 10f);
 		}
 		else
