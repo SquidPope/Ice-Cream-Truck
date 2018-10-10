@@ -148,7 +148,7 @@ public class ThirdPersonCamera : MonoBehaviour
 		return isOccluded;
 	}
 
-	float CheckCameraPoints(Vector3 from, Vector3 to)
+	public float CheckCameraPoints(Vector3 from, Vector3 to)
 	{
 		float nearestDist = -1f;
 

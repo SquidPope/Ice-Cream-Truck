@@ -32,4 +32,11 @@ public class Follower : MonoBehaviour
 			rigidbody.velocity = transform.forward * vel;
 		}	
 	}
+
+	public void DestroySelf()
+	{
+		//ToDo: Any other garbage collection that might be needed.
+		FollowerManager.Instance.RemoveFollower();
+		GameObject.Destroy(gameObject);
+	}
 }
