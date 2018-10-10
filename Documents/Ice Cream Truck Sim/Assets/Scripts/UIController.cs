@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour 
@@ -11,6 +12,9 @@ public class UIController : MonoBehaviour
 	public Image helpPanel;
 	public Text helpDisplay;
 	public Slider iceCreamSaleProgress;
+
+	public Image gameOverPanel;
+	public Text gameOverScore;
 
 	string iceCreamHelp = "Press SPACE to sell Ice Cream!";
 	string scoreText = "Score: ";
@@ -37,6 +41,14 @@ public class UIController : MonoBehaviour
 		//Force the Slider's max value to be greater than 0.
 		if (iceCreamSaleProgress.maxValue <= 0f)
 			iceCreamSaleProgress.maxValue = 1f;
+
+		iceCreamSaleProgress.enabled = false;
+
+		gameOverPanel.gameObject.SetActive(false);
+		for(int i = 0; i < gameOverPanel.transform.childCount; i++)
+		{
+			gameOverPanel.transform.GetChild(i).gameObject.SetActive(false);
+		}
 	}
 
 	public void ToggleHelpPanel(bool isOn)
@@ -49,7 +61,45 @@ public class UIController : MonoBehaviour
 			helpDisplay.text = "";
 	}
 
+	public void MainMenuPressed()
+	{
+		SceneManager.LoadScene("mainMenu");
+	}
+
+	public void ExitPressed()
+	{
+		//ToDo: Ask player if sure.
+		Application.Quit();
+	}
+
 	public void UpdateUI()
+	{
+		switch (GameController.Instance.State)
+		{
+			case GameState.Playing:
+			//ToDo: Make sure pause menu is hidden
+			UpdateHUD();
+			break;
+
+			case GameState.Paused:
+			//ToDo: Display pause menu
+			break;
+
+			case GameState.GameOver:
+			gameOverPanel.gameObject.SetActive(true);
+			for(int i = 0; i < gameOverPanel.transform.childCount; i++)
+			{
+				gameOverPanel.transform.GetChild(i).gameObject.SetActive(true);
+			}
+			gameOverScore.text = "Final Score: " + GameController.Instance.score; //ToDo: For secret ending, set to ???
+			break;
+
+			default:
+			break;
+		}
+	}
+
+	void UpdateHUD()
 	{
 		scoreDisplay.text = scoreText + GameController.Instance.score;
 
@@ -62,9 +112,10 @@ public class UIController : MonoBehaviour
 			{
 				seconds -= 60f;
 				minutes++;
-			}while (seconds > 60f);
+			} while (seconds > 60f);
 		}
 
+		//ToDo: if seconds == 0.# make sure the 0 is displayed
 		timeDisplay.text = minutes + ":" + seconds.ToString("#.00");
 
 		if (Input.GetKeyDown(KeyCode.Space))

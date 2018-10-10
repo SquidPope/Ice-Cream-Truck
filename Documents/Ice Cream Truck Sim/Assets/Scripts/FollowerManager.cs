@@ -11,7 +11,7 @@ public class FollowerManager : MonoBehaviour
 	GameObject spawn;
 	Follower currentFollower = null;
 
-	float spawnInterval = 5f;
+	float spawnInterval = 15f;
 	float spawnTimer = 0f;
 
 	static FollowerManager instance;

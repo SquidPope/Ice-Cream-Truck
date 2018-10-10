@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState {Playing, Paused, GameOver, Secret}
 public class GameController : MonoBehaviour
 {
+	GameState state = GameState.Playing;
 	public int score = 0;
 	public float timeLimit; //In seconds
 	public float timeLeft;
@@ -24,6 +26,17 @@ public class GameController : MonoBehaviour
 			}
 
 			return instance;
+		}
+	}
+
+	public GameState State
+	{
+		get { return state; }
+
+		set
+		{
+			state = value;
+			UIController.Instance.UpdateUI();
 		}
 	}
 
@@ -51,41 +64,61 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	void Update() 
 	{
-		//if we aren't paused
-		timeLeft -= Time.deltaTime;
-		if (timeLeft <= 0)
+		if (Input.GetKeyUp(KeyCode.Escape))
 		{
-			//Game Over
+			if (state == GameState.Paused)
+			{
+				//Play
+			}
+			else if (state == GameState.Playing)
+			{
+				//Pause
+			}
+			else if (state == GameState.GameOver)
+			{
+				//Load main menu?
+			}
 		}
 
-		if (truckInZone)
+		if (State == GameState.Playing)
 		{
-			if (TruckController.Instance.Velocity == 0)
+			timeLeft -= Time.deltaTime;
+			if (timeLeft <= 0)
 			{
-				//Display UI "Press Space to sell ice cream"
-				if (Input.GetKey(KeyCode.Space))
-				{
-					if (!hasSoldIceCream)
-					{
-						iceCreamProgress += Time.deltaTime;
+				state = GameState.GameOver;
+				//ToDo: Slow/Stop Truck
+			}
 
-						//Fill a bar slowly, give point when full.
-						if (iceCreamProgress >= iceCreamDelay)
+			if (truckInZone)
+			{
+				if (TruckController.Instance.Velocity == 0)
+				{
+					//Display UI "Press Space to sell ice cream"
+					if (Input.GetKey(KeyCode.Space))
+					{
+						if (!hasSoldIceCream)
 						{
-							score++;
-							hasSoldIceCream = true;
-							//ToDo:Make iceCreamDelay longer every time.
-							iceCreamProgress = 0f;
+							iceCreamProgress += Time.deltaTime;
+
+							//Fill a bar slowly, give point when full.
+							if (iceCreamProgress >= iceCreamDelay)
+							{
+								score++;
+								hasSoldIceCream = true;
+								//ToDo:Make iceCreamDelay longer every time.
+								iceCreamProgress = 0f;
+							}
 						}
 					}
-				}
 
-				if (Input.GetKeyUp(KeyCode.Space))
-				{
-					iceCreamProgress = 0f;
+					if (Input.GetKeyUp(KeyCode.Space))
+					{
+						iceCreamProgress = 0f;
+					}
 				}
 			}
 		}
+		
 
 		UIController.Instance.UpdateUI();
 	}
