@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23567074231315818}
   m_Layer: 0
   m_Name: Building (3)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 54873402201981514}
   m_Layer: 0
   m_Name: Tile2
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 23305104354632666}
   m_Layer: 0
   m_Name: Building
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 23997260631880656}
   m_Layer: 0
   m_Name: Building (2)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 23103279311605410}
   m_Layer: 0
   m_Name: Building (1)
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

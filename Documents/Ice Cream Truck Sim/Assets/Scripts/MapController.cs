@@ -78,7 +78,7 @@ public class MapController : MonoBehaviour
 				MapTile mapTile = tile.AddComponent<MapTile>();
 				mapTile.MapPos = new Vector2(i, j);
 				mapTiles.Add(mapTile);
-				mapTile.gameObject.tag = "Tile";
+				//mapTile.gameObject.tag = "Tile";
 
 				//Change tilePos to next tile
 				tileX += offsetX;

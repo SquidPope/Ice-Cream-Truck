@@ -11,7 +11,7 @@ public class TruckController : MonoBehaviour
 
 	float vel = 0;
 	float acceleration = 0.1f; //ToDo: acceleration should increase the longer the same button (w or s) is held, up to a max.
-	float maxSpeed = 20f;
+	float maxSpeed = 10f; //ToDo: maxSpeed should increase as time runs out, or as "Spookiness" increases
 	float turnRate = 2f;
 	float idleDecrease = 0.01f;
 
@@ -67,24 +67,33 @@ public class TruckController : MonoBehaviour
 
 	void OnCollisionEnter(Collision other)
 	{
-		if (other.gameObject.tag == "Follower")
+		string currentTag = "";
+		foreach (ContactPoint c in other.contacts)
 		{
-			//ToDo: something, idk
-			return;
+			//Each contact is basically a vertex, so most collisions have 3 or 4 contacts with the same object, but we only need to do these things once per collision.
+			if (c.otherCollider.tag != currentTag)
+			{
+				if (c.otherCollider.tag == "Follower")
+				{
+					//ToDo: something, idk
+					return;
+				}
+				else if (c.otherCollider.tag == "Tile")
+				{
+					currentTile = other.gameObject;
+					MapController.Instance.UpdateMap();
+				}
+				else
+				{
+					//We hit a building or something.
+					vel = 0;
+					rigidbody.velocity = Vector3.zero;
+					Debug.Log("velocity: " + rigidbody.velocity);
+				}
+
+				currentTag = c.otherCollider.tag;
+			}
 		}
-		else if (other.gameObject.tag == "Tile")
-		{
-			currentTile = other.gameObject;
-		}
-		else
-		{
-			//We hit a building or something.
-			//ToDo: As long as we are still hitting a building or something, don't accelerate into it.
-			vel = 0;
-			rigidbody.velocity = Vector3.zero;
-		}
-		
-		MapController.Instance.UpdateMap();
 	}
 
 	void FixedUpdate() 
@@ -115,9 +124,9 @@ public class TruckController : MonoBehaviour
 				vel = 0;
 				rigidbody.velocity = Vector3.zero;
 			}
-			else if (vel > -acceleration)
+			else if (vel > -acceleration && vel != 0)
 			{
-				//If we are really close to a full stop, just stop.
+				//If we are really close to a full stop but still moving, just stop.
 				vel = 0;
 				rigidbody.velocity = Vector3.zero;
 			}

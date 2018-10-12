@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
 	public Image gameOverPanel;
 	public Text gameOverScore;
 
-	string iceCreamHelp = "Press SPACE to sell Ice Cream!";
+	string iceCreamHelp = "Stop and hold SPACE to sell Ice Cream!";
 	string scoreText = "Score: ";
 
 	static UIController instance;
@@ -114,6 +114,8 @@ public class UIController : MonoBehaviour
 				minutes++;
 			} while (seconds > 60f);
 		}
+
+		//ToDo: Let the FollowerManager know, because if the follower hits the player while they are selling ice cream the game should end (?)
 
 		//ToDo: if seconds == 0.# make sure the 0 is displayed
 		timeDisplay.text = minutes + ":" + seconds.ToString("#.00");
