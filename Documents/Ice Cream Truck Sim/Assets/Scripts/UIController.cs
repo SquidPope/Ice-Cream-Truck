@@ -15,9 +15,12 @@ public class UIController : MonoBehaviour
 
 	public Image gameOverPanel;
 	public Text gameOverScore;
+	public Text gameOverHintsText;
 
 	string iceCreamHelp = "Stop and hold SPACE to sell Ice Cream!";
 	string scoreText = "Score: ";
+	static string[] gameOverHints = new string[] {"ncuq", "xeakfone irakfo gn", "tdian c of", "td nptxmv", "riop ree ulisd", "tdkse fmv", "smianx", "c fow diem", "aknx vttda kutrw", "sbia c for xn"};
+	int hintIndex = 0;
 
 	static UIController instance;
 	public static UIController Instance
@@ -49,6 +52,8 @@ public class UIController : MonoBehaviour
 		{
 			gameOverPanel.transform.GetChild(i).gameObject.SetActive(false);
 		}
+
+		hintIndex = Random.Range(0, gameOverHints.Length);
 	}
 
 	public void ToggleHelpPanel(bool isOn)
@@ -86,12 +91,14 @@ public class UIController : MonoBehaviour
 			break;
 
 			case GameState.GameOver:
+			gameOverHintsText.text = gameOverHints[hintIndex]; //if a reset() function happens, just change index
+			
 			gameOverPanel.gameObject.SetActive(true);
 			for(int i = 0; i < gameOverPanel.transform.childCount; i++)
 			{
 				gameOverPanel.transform.GetChild(i).gameObject.SetActive(true);
 			}
-			gameOverScore.text = "Final Score: " + GameController.Instance.score; //ToDo: For secret ending, set to ???
+			gameOverScore.text = "Final Score: " + GameController.Instance.Score; //ToDo: For secret ending, set to ???
 			break;
 
 			default:
@@ -99,9 +106,17 @@ public class UIController : MonoBehaviour
 		}
 	}
 
+	public void SecretDisplay(bool isOn)
+	{
+		if (isOn)
+			timeDisplay.color = new Color(116f, 0f, 0f, 1f);
+		else
+			timeDisplay.color = Color.black;
+	}
+
 	void UpdateHUD()
 	{
-		scoreDisplay.text = scoreText + GameController.Instance.score;
+		scoreDisplay.text = scoreText + GameController.Instance.Score;
 
 		float minutes = 0f;
 		float seconds = GameController.Instance.timeLeft;

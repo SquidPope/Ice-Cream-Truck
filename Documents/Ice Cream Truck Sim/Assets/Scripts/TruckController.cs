@@ -88,7 +88,6 @@ public class TruckController : MonoBehaviour
 					//We hit a building or something.
 					vel = 0;
 					rigidbody.velocity = Vector3.zero;
-					Debug.Log("velocity: " + rigidbody.velocity);
 				}
 
 				currentTag = c.otherCollider.tag;
@@ -179,6 +178,7 @@ public class TruckController : MonoBehaviour
 			else
 			{
 				audioSource.UnPause();
+				//chance to play 'weird' version
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 47658a5dff936ab45bdd6d276b4bf9e2
-timeCreated: 1537847659
+guid: 10658b53aca5b22439068db3855ca8dc
+timeCreated: 1539339085
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
@@ -10,9 +10,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: WoodenNickelBlack
+  fontName: Quick End Jerk
   fontNames:
-  - WoodenNickelBlack
+  - Quick End Jerk
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

@@ -6,13 +6,17 @@ public enum GameState {Playing, Paused, GameOver, Secret}
 public class GameController : MonoBehaviour
 {
 	GameState state = GameState.Playing;
-	public int score = 0;
+	int score = 0;
 	public float timeLimit; //In seconds
 	public float timeLeft;
 	public float iceCreamDelay; //Also in seconds
 	public float iceCreamProgress = 0f;
 	bool truckInZone = false;
 	bool hasSoldIceCream = false;
+
+	float secretDelay = 30f;
+	float secretTimer = 0f;
+	bool isTimingSecret = false;
 
 	static GameController instance;
 	public static GameController Instance
@@ -37,6 +41,38 @@ public class GameController : MonoBehaviour
 		{
 			state = value;
 			UIController.Instance.UpdateUI();
+		}
+	}
+
+	public int Score
+	{
+		get { return score; }
+		set
+		{
+			if (value == 2)
+			{
+				isTimingSecret = true;
+			}
+			else if (value == 3) //The timing should work as long as they start the sale withing 10 seconds of the delay.
+			{
+				if (secretTimer >= secretDelay && secretTimer <= secretDelay + iceCreamDelay + 10f)
+				{
+					//ToDo:Build super awesome amazing secret ending
+					Debug.Log("woo");
+				}
+				else
+				{
+					isTimingSecret = false;
+				}
+			}
+			else
+			{
+				isTimingSecret = false;
+			}
+
+			UIController.Instance.SecretDisplay(isTimingSecret);
+
+			score = value;
 		}
 	}
 
@@ -82,6 +118,11 @@ public class GameController : MonoBehaviour
 
 		if (State == GameState.Playing)
 		{
+			if (isTimingSecret)
+			{
+				secretTimer += Time.deltaTime;
+			}
+
 			timeLeft -= Time.deltaTime;
 			if (timeLeft <= 0)
 			{
@@ -103,7 +144,7 @@ public class GameController : MonoBehaviour
 							//Fill a bar slowly, give point when full.
 							if (iceCreamProgress >= iceCreamDelay)
 							{
-								score++;
+								Score++;
 								hasSoldIceCream = true;
 								//ToDo:Make iceCreamDelay longer every time.
 								iceCreamProgress = 0f;
