@@ -73,15 +73,14 @@ public class MapController : MonoBehaviour
 					offsetX = prefab.transform.localScale.x;
 					offsetZ = prefab.transform.localScale.z;
 				}
-				
-				
-					
 
 				GameObject tile = GameObject.Instantiate(prefab, new Vector3(tileX, 0f, tileZ), Quaternion.identity);
-				int flip = Random.Range(0, 1);
+				int flip = Random.Range(0, 2);
 				if (flip == 1)
+				{
 					tile.transform.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
-
+				}
+					
 				MapTile mapTile = tile.AddComponent<MapTile>();
 				mapTile.MapPos = new Vector2(i, j);
 				mapTiles.Add(mapTile);

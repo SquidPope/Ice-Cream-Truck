@@ -57,7 +57,12 @@ public class HUDController : MonoBehaviour
 
 		//ToDo: Let the FollowerManager know, because if the follower hits the player while they are selling ice cream the game should end (?)
 
-		//ToDo: if seconds == 0.# make sure the 0 is displayed
-		timeDisplay.text += minutes + ":" + seconds.ToString("#.00");
+		seconds = Mathf.Abs(seconds);
+
+		timeDisplay.text += minutes + ":";
+		if (seconds < 1)
+			timeDisplay.text += "0";
+
+		timeDisplay.text += seconds.ToString("#.00");
 	}
 }
