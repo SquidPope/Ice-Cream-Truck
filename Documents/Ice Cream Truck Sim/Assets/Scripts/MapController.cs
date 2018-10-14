@@ -74,11 +74,17 @@ public class MapController : MonoBehaviour
 					offsetZ = prefab.transform.localScale.z;
 				}
 				
+				
+					
+
 				GameObject tile = GameObject.Instantiate(prefab, new Vector3(tileX, 0f, tileZ), Quaternion.identity);
+				int flip = Random.Range(0, 1);
+				if (flip == 1)
+					tile.transform.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+
 				MapTile mapTile = tile.AddComponent<MapTile>();
 				mapTile.MapPos = new Vector2(i, j);
 				mapTiles.Add(mapTile);
-				//mapTile.gameObject.tag = "Tile";
 
 				//Change tilePos to next tile
 				tileX += offsetX;
@@ -99,7 +105,7 @@ public class MapController : MonoBehaviour
 			return;
 		}
 		
-		//find each tile that is too far away ??
+		//find each tile that is too far away
 		//if x == 4, row 0 should move "up"
 		//if y == 2, column 4 should move "left"
 
@@ -128,6 +134,7 @@ public class MapController : MonoBehaviour
 				//keep y(z in world space?) the same, move x to map pos of x the highest world x + x offset
 				m.WorldPos =  new Vector3(m.WorldPos.x, 0f, nextTileZ);
 				m.MapPos = new Vector2(mapWidth - 1, m.MapPos.y);
+				m.RandomizeMessages();
 			}
 		}
 		else if (truckTile.MapPos.x < mapCenter.x)
@@ -149,6 +156,7 @@ public class MapController : MonoBehaviour
 				//keep y(z in world space?) the same, move x to map pos of x the highest world x + x offset
 				m.WorldPos =  new Vector3(m.WorldPos.x, 0f, nextTileZ);
 				m.MapPos = new Vector2(0, m.MapPos.y);
+				m.RandomizeMessages();
 			}
 		}
 
@@ -171,6 +179,7 @@ public class MapController : MonoBehaviour
 				//keep y(z in world space?) the same, move x to map pos of x the highest world x + x offset
 				m.WorldPos =  new Vector3(nextTileX, 0f, m.WorldPos.z);
 				m.MapPos = new Vector2(m.MapPos.x, mapHeight - 1);
+				m.RandomizeMessages();
 			}
 		}
 		else if (truckTile.MapPos.y < mapCenter.y)
@@ -192,6 +201,7 @@ public class MapController : MonoBehaviour
 				//keep y(z in world space?) the same, move x to map pos of x the highest world x + x offset
 				m.WorldPos =  new Vector3(nextTileX, 0f, m.WorldPos.z);
 				m.MapPos = new Vector2(m.MapPos.x, 0);
+				m.RandomizeMessages();
 			}
 		}
 

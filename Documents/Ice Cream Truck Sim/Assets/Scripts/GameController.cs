@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState {Playing, Paused, GameOver, Secret}
 public class GameController : MonoBehaviour
@@ -40,7 +41,9 @@ public class GameController : MonoBehaviour
 		set
 		{
 			state = value;
-			UIController.Instance.UpdateUI();
+
+			if (state != GameState.Secret)
+				UIController.Instance.UpdateUI();
 		}
 	}
 
@@ -70,7 +73,7 @@ public class GameController : MonoBehaviour
 				isTimingSecret = false;
 			}
 
-			UIController.Instance.SecretDisplay(isTimingSecret);
+			HUDController.Instance.SecretDisplay(isTimingSecret);
 
 			score = value;
 		}
@@ -93,8 +96,21 @@ public class GameController : MonoBehaviour
 	void Awake() 
 	{
 		ThirdPersonCamera.UseExistingOrCreateMainCamera();
-		UIController.Instance.UpdateUI();
+		
 		timeLeft = timeLimit;
+
+		string levelName = SceneManager.GetActiveScene().name;
+
+		if (levelName == "elsewhere")
+		{
+			State = GameState.Secret;
+			HUDController.Instance.UpdateHUD();
+		}
+		else
+		{
+			State = GameState.Playing;
+			UIController.Instance.UpdateUI();
+		}
 	}
 	
 	// Update is called once per frame
@@ -158,9 +174,20 @@ public class GameController : MonoBehaviour
 					}
 				}
 			}
+
+			UIController.Instance.UpdateUI();
+		}
+		else if (State == GameState.Paused)
+		{
+			UIController.Instance.UpdateUI();
+		}
+		else if (State == GameState.Secret)
+		{
+			timeLeft -= Time.deltaTime;
+			HUDController.Instance.UpdateHUD();
 		}
 		
 
-		UIController.Instance.UpdateUI();
+		
 	}
 }

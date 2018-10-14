@@ -98,7 +98,7 @@ public class TruckController : MonoBehaviour
 	void FixedUpdate() 
 	{
 		//If we aren't playing, don't even
-		if (GameController.Instance.State != GameState.Playing)
+		if (GameController.Instance.State != GameState.Playing && GameController.Instance.State != GameState.Secret)
 			return;
 
 		//ToDo: slight deceleration if no button is down?

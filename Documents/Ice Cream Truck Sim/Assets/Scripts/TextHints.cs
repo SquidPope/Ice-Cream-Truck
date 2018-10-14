@@ -10,7 +10,7 @@ public class TextHints : MonoBehaviour
 	Text hintText;
 	Color textColor;
 	public bool isShowingHint = false;
-	static string[] hints = new string[] {"Fail, Pray", "Simple, with the <b>KEY</b>", "It's just a Simulator?!", "<b>STOP</b>", "Okay, what?", "Pray and Fail?", "Behind you", "AAAAAAA", "Look back"};
+	static string[] hints = new string[] {"Fail, Pray", "Simple, with the <b>KEY</b>", "It's just a Simulator?!", "Okay, what?", "Pray and Fail?", "Behind you", "Look back", "Fail\n\nPray"};
 
 	float fadeDelay = 0.0075f;
 

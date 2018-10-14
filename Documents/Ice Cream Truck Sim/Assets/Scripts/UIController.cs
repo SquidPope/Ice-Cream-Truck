@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour 
 {
-	public Image scorePanel;
-	public Text scoreDisplay;
-	public Text timeDisplay;
 	public Image helpPanel;
 	public Text helpDisplay;
 	public Slider iceCreamSaleProgress;
@@ -18,7 +15,7 @@ public class UIController : MonoBehaviour
 	public Text gameOverHintsText;
 
 	string iceCreamHelp = "Stop and hold SPACE to sell Ice Cream!";
-	string scoreText = "Score: ";
+	
 	static string[] gameOverHints = new string[] {"ncuq", "xeakfone irakfo gn", "tdian c of", "td nptxmv", "riop ree ulisd", "tdkse fmv", "smianx", "c fow diem", "aknx vttda kutrw", "sbia c for xn"};
 	int hintIndex = 0;
 
@@ -83,7 +80,15 @@ public class UIController : MonoBehaviour
 		{
 			case GameState.Playing:
 			//ToDo: Make sure pause menu is hidden
-			UpdateHUD();
+			HUDController.Instance.UpdateHUD();
+
+			if (Input.GetKeyDown(KeyCode.Space))
+			iceCreamSaleProgress.enabled = true;
+
+			if (Input.GetKeyUp(KeyCode.Space))
+				iceCreamSaleProgress.enabled = false;
+
+			iceCreamSaleProgress.value = GameController.Instance.iceCreamProgress;
 			break;
 
 			case GameState.Paused:
@@ -104,43 +109,5 @@ public class UIController : MonoBehaviour
 			default:
 			break;
 		}
-	}
-
-	public void SecretDisplay(bool isOn)
-	{
-		if (isOn)
-			timeDisplay.color = new Color(116f, 0f, 0f, 1f);
-		else
-			timeDisplay.color = Color.black;
-	}
-
-	void UpdateHUD()
-	{
-		scoreDisplay.text = scoreText + GameController.Instance.Score;
-
-		float minutes = 0f;
-		float seconds = GameController.Instance.timeLeft;
-		
-		if (seconds > 60f)
-		{
-			do
-			{
-				seconds -= 60f;
-				minutes++;
-			} while (seconds > 60f);
-		}
-
-		//ToDo: Let the FollowerManager know, because if the follower hits the player while they are selling ice cream the game should end (?)
-
-		//ToDo: if seconds == 0.# make sure the 0 is displayed
-		timeDisplay.text = minutes + ":" + seconds.ToString("#.00");
-
-		if (Input.GetKeyDown(KeyCode.Space))
-			iceCreamSaleProgress.enabled = true;
-
-		if (Input.GetKeyUp(KeyCode.Space))
-			iceCreamSaleProgress.enabled = false;
-
-		iceCreamSaleProgress.value = GameController.Instance.iceCreamProgress;
 	}
 }
