@@ -14,6 +14,7 @@ public class TruckController : MonoBehaviour
 	float maxSpeed = 10f; //ToDo: maxSpeed should increase as time runs out, or as "Spookiness" increases
 	float turnRate = 2f;
 	float idleDecrease = 0.01f;
+	float gravity = 2f;
 
 	GameObject currentTile;
 
@@ -167,6 +168,9 @@ public class TruckController : MonoBehaviour
 			}
 
 			rigidbody.velocity = transform.forward * vel;
+
+			if (vel > acceleration || vel < -acceleration)
+				rigidbody.velocity += -transform.up * gravity; //If we're moving, apply gravity.
 		}
 
 		if (Input.GetMouseButtonUp(0))
