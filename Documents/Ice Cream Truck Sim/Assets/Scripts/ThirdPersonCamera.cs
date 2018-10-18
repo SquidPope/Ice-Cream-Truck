@@ -63,7 +63,6 @@ public class ThirdPersonCamera : MonoBehaviour
 	void Awake()
 	{
 		instance = this;
-		GameObject.DontDestroyOnLoad(transform.gameObject);
 	}
 
 	void Start()

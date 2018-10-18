@@ -62,6 +62,7 @@ public class GameController : MonoBehaviour
 				{
 					//ToDo:Build super awesome amazing secret ending
 					Debug.Log("woo");
+					SceneManager.LoadScene("elsewhere");
 				}
 				else
 				{

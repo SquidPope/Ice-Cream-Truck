@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.36764705, g: 0.067582175, b: 0.067582175, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.05
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45114696, g: 0.49976426, b: 0.56766427, a: 1}
+  m_Sun: {fileID: 698432908}
+  m_IndirectSpecularColor: {r: 0.44824702, g: 0.49827307, b: 0.575583, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -238,8 +238,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 0.6102941, g: 0.44565088, b: 0.2692474, a: 1}
-  m_Intensity: 0.1
+  m_Color: {r: 0.5955882, g: 0.6820487, b: 1, a: 1}
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -271,13 +271,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 698432907}
-  m_LocalRotation: {x: 0.2090646, y: -0.25268397, z: 0.056018684, w: 0.9430295}
+  m_LocalRotation: {x: 0.3696438, y: -0.23911758, z: 0.099045746, w: 0.89239913}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 25, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: -30, z: 0}
 --- !u!1 &864820527
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 1268432249}
   - component: {fileID: 1268432248}
   - component: {fileID: 1268432252}
+  - component: {fileID: 1268432253}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -364,7 +365,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.089208476, g: 0.24324176, b: 0.4852941, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -412,6 +413,29 @@ Skybox:
   m_GameObject: {fileID: 1268432247}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: a911da68b9dd26a44991011c27eb5e49, type: 2}
+--- !u!114 &1268432253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1268432247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11adf7452c8f1f2428347ed4652793ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLookAt: {fileID: 0}
+  distance: 0
+  distanceMin: 3
+  distanceMax: 13
+  XmouseSensitivity: 5
+  YmouseSensitivity: 5
+  mouseWheelSensitivity: 5
+  YminLimit: -40
+  YmaxLimit: 80
+  distanceSmooth: 0.05
+  Xsmooth: 0.05
+  Ysmooth: 0.1
 --- !u!1 &1272430429
 GameObject:
   m_ObjectHideFlags: 0
