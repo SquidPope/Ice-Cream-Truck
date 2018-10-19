@@ -223,6 +223,7 @@ public class ThirdPersonCamera : MonoBehaviour
 	{
 		if (targetLookAt == null)
 			return;
+			
 
 		HandlePlayerInput();
 
@@ -248,23 +249,33 @@ public class ThirdPersonCamera : MonoBehaviour
 		}
 		else
 		{
-			tempCamera = new GameObject("Main Camera");
+			tempCamera = new GameObject("MainCamera");
 			tempCamera.AddComponent<Camera>();
-			tempCamera.tag = "Main Camera";
+			tempCamera.AddComponent<AudioListener>();
+			tempCamera.tag = "MainCamera";
 		}
 
-		tempCamera.AddComponent<ThirdPersonCamera>();
 		cameraScriptInstance = tempCamera.GetComponent<ThirdPersonCamera>();
 
-		tempLookAt = GameObject.Find("targetLookAt");
-
-		if (tempLookAt == null)
+		if (cameraScriptInstance == null)
 		{
-			tempLookAt = new GameObject("targetLookAt");
-			tempLookAt.transform.position = Vector3.zero;
+			tempCamera.AddComponent<ThirdPersonCamera>();
+			cameraScriptInstance = tempCamera.GetComponent<ThirdPersonCamera>();
 		}
 
-		cameraScriptInstance.targetLookAt = tempLookAt.transform;
+		if (cameraScriptInstance.targetLookAt == null)
+		{
+			tempLookAt = GameObject.Find("targetLookAt");
+
+			if (tempLookAt == null)
+			{
+				tempLookAt = new GameObject("targetLookAt");
+				tempLookAt.transform.position = Vector3.zero;
+			}
+
+			cameraScriptInstance.targetLookAt = tempLookAt.transform;
+		}
+		Debug.Log("target parent: " + cameraScriptInstance.targetLookAt.parent.gameObject.name);
 	}
 
 	public static float ClampAngle(float angle, float min, float max)

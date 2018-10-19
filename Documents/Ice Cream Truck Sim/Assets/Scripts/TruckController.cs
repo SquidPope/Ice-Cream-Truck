@@ -168,13 +168,6 @@ public class TruckController : MonoBehaviour
 			}
 
 			rigidbody.velocity = transform.forward * vel;
-
-			//either Blender is weird, or Unity is
-			//rigidbody.velocity = -transform.up * vel; //ToDo: ALL Rotation is boned halp
-
-			//ToDo: Actually check if we're in the air
-			//if (vel > acceleration || vel < -acceleration)
-			//	rigidbody.velocity += -transform.up * gravity; //If we're moving, apply gravity.
 		}
 
 		if (Input.GetMouseButtonUp(0))

@@ -61,12 +61,10 @@ public class GameController : MonoBehaviour
 			{
 				isTimingSecret = true;
 			}
-			else if (value == 3) //The timing should work as long as they start the sale withing 10 seconds of the delay.
+			else if (value == 3) //The timing should work as long as they start the sale within 10 seconds of the delay.
 			{
-				if (secretTimer >= secretDelay && secretTimer <= secretDelay + iceCreamDelay + 10f)
+				if (secretTimer >= secretDelay && secretTimer <= secretDelay + iceCreamDelay + 10f && !TruckController.Instance.IsMusicPlaying)
 				{
-					//ToDo:Build super awesome amazing secret ending
-					Debug.Log("woo");
 					SceneManager.LoadScene("elsewhere");
 				}
 				else
