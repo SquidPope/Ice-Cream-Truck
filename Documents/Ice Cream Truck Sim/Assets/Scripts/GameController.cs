@@ -44,6 +44,11 @@ public class GameController : MonoBehaviour
 
 			if (state != GameState.Secret)
 				UIController.Instance.UpdateUI();
+
+			//We only want to save if the game ended, or we got to the secret area, not every time we Pause/Resume.
+			if (state == GameState.GameOver || state == GameState.Secret)
+				if (GameObject.FindGameObjectWithTag("XMLController") != null) //ToDo: Remove for final release, this is just for starting from a given level instead of the main menu.
+					XMLController.Instance.Save();
 		}
 	}
 
@@ -123,9 +128,15 @@ public class GameController : MonoBehaviour
 			{
 				//Play
 			}
-			else if (state == GameState.Playing)
+			else if (state == GameState.Playing || state == GameState.Secret)
 			{
 				//Pause
+
+				if (GameObject.FindGameObjectWithTag("XMLController") != null) //ToDo: Remove for final release, this is just for starting from a given level instead of the main menu.
+					XMLController.Instance.Save();
+
+				//ToDo: Remove after pause is implemented.
+				Application.Quit();
 			}
 			else if (state == GameState.GameOver)
 			{
@@ -187,7 +198,13 @@ public class GameController : MonoBehaviour
 			timeLeft -= Time.deltaTime;
 			HUDController.Instance.UpdateHUD();
 		}
-		
+		else if (state == GameState.GameOver)
+		{
+			if (Input.GetKeyUp(KeyCode.Escape))
+			{
+				SceneManager.LoadScene("mainMenu");
+			}
+		}
 
 		
 	}
