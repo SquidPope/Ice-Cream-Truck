@@ -6,16 +6,31 @@ using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public class OptionsData
+{
+	public int mapSize; //ToDo: is there a reason to make this a Vector2?
+	public float volume;
+	public float mouseSensitivity;
+
+	public OptionsData()
+	{
+		mapSize = 5;
+		volume = 1f;
+		mouseSensitivity = 1f;
+	}
+}
 public class SaveData
 {
 	public int highScore;
 	public bool isSecret;
-	//ToDo: Options
+	public OptionsData options;
 
 	public SaveData()
 	{
 		highScore = 0;
 		isSecret = false;
+
+		options = new OptionsData();
 	}
 }
 
@@ -40,6 +55,12 @@ public class XMLController : MonoBehaviour
 		}
 	}
 
+	public OptionsData Options
+	{
+		get { return save.options; }
+		set { save.options = value; }
+	}
+
 	public int GetHighScore()
 	{
 		return save.highScore;
@@ -49,7 +70,12 @@ public class XMLController : MonoBehaviour
 	{
 		return save.isSecret;
 	}
-	
+
+	public int GetMapSize()
+	{
+		return save.options.mapSize;
+	}
+
 	void Awake()
 	{
 		path = Application.persistentDataPath + "\\QurvFocTot.acxc";

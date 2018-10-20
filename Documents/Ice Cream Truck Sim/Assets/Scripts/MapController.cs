@@ -39,11 +39,21 @@ public class MapController : MonoBehaviour
 
 	void GenerateMap()
 	{
-		if (mapHeight < 2)
-			mapHeight = 2;
+		int size = XMLController.Instance.GetMapSize();
+		if (size > 1)
+		{
+			mapHeight = size;
+			mapWidth = size;
+		}
+		else
+		{
+			//If the saved map size is invalid, use the default.
+			if (mapHeight < 2)
+				mapHeight = 2;
 
-		if (mapWidth  < 2)
-			mapWidth = 2;
+			if (mapWidth  < 2)
+				mapWidth = 2;
+		}
 
 		float tileX = 0f;
 		float tileZ = 0f;

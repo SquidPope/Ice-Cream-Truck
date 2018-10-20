@@ -63,6 +63,8 @@ public class TruckController : MonoBehaviour
 	{
 		rigidbody = gameObject.GetComponent<Rigidbody>();
 		audioSource = gameObject.GetComponent<AudioSource>();
+
+		audioSource.volume = XMLController.Instance.Options.volume;
 		audioSource.Pause();
 	}
 

@@ -55,11 +55,6 @@ public class ThirdPersonCamera : MonoBehaviour
 
 	public static ThirdPersonCamera instance;
 
-	public float MouseSensitivity 
-	{
-		get { return mouseSensitivityMultiplier; }
-	}
-
 	void Awake()
 	{
 		instance = this;
@@ -67,6 +62,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
 	void Start()
 	{
+		//ToDo: Get Mouse Sensitivity from XMLController.
 		distance = Mathf.Clamp(distance, distanceMin, distanceMax);
 		startDistance = distance;
 		Reset();
