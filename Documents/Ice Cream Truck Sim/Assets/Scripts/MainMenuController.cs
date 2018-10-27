@@ -36,6 +36,7 @@ public class MainMenuController : MonoBehaviour
 	{
 		ToggleMainPanel(false);
 
+		//ToDo: Rotate over time
 		Camera.main.transform.Rotate(0f, 90f, 0f);
 		
 		ToggleOptionsPanel(true);

@@ -48,7 +48,18 @@ public class XMLController : MonoBehaviour
 			if (instance == null)
 			{
 				GameObject go = GameObject.FindGameObjectWithTag("XMLController");
-				instance = go.GetComponent<XMLController>();
+
+				if (go != null)
+				{
+					instance = go.GetComponent<XMLController>();
+				}
+				else
+				{
+					//If an XMLController doesn't already exist in the scene, make one.
+					GameObject obj = new GameObject("XMLController");
+					instance = obj.AddComponent<XMLController>();
+					obj.tag = "XMLController";
+				}	
 			}
 
 			return instance;

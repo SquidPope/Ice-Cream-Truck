@@ -24,7 +24,7 @@ public class OptionsController : MonoBehaviour
 
 		if (mapSizeOptions.Contains(options.mapSize))
 			mapSizeDropdown.value = mapSizeOptions.FindIndex(x => x == options.mapSize);
-		else if (options.mapSize < 100 && options.mapSize > 1) //If the player finds and edits the save file, I'll allow different map sizes but limit them to less than 100, more could crash their computor.
+		else if (options.mapSize < 100 && options.mapSize > 1) //If the player finds and edits the save file, I'll allow different map sizes but limit them to less than 100, more could crash their computer.
 			mapSizeOptions.Add(options.mapSize);
 		else
 			options.mapSize = mapSizeOptions[0];
@@ -41,10 +41,24 @@ public class OptionsController : MonoBehaviour
 		options.mapSize = mapSizeOptions[optionIndex];
 	}
 
+	public void OnVolumeChange(float vol)
+	{
+		options.volume = vol;
+	}
+
+	public void OnMouseSensitivityChange(float sensitivity)
+	{
+		options.mouseSensitivity = sensitivity;
+	}
+
 	public void OnOptionsExit()
 	{
-		XMLController.Instance.Options = options;
+		if (Camera.main.GetComponent<ThirdPersonCamera>()) //ToDo: Find a cheaper and cleaner way to do this.
+			Camera.main.GetComponent<ThirdPersonCamera>().ChangeMouseSensitivity(options.mouseSensitivity);
 
+		//if AudioController exists, update volume
+
+		XMLController.Instance.Options = options;
 		XMLController.Instance.Save();
 	}
 }

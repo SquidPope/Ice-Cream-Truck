@@ -1,16 +1,17 @@
 fileFormatVersion: 2
-guid: 0d08ff85e58b15b42a902c5f8125b858
-timeCreated: 1539721279
+guid: 38d544a9c6fc93a4d8764d68cffddd09
+timeCreated: 1540580542
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Material
+    2100000: Side
+    2100002: Roof
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Back_Wheels
+    4300000: Cylinder
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}

@@ -13,6 +13,7 @@ public class FollowerManager : MonoBehaviour
 
 	float spawnInterval = 15f;
 	float spawnTimer = 0f;
+	float despawnLimit = 30f;
 
 	static FollowerManager instance;
 	public static FollowerManager Instance
@@ -44,7 +45,7 @@ public class FollowerManager : MonoBehaviour
 	{
 		if (currentFollower == null) //ToDo: Do we ever want multiple followers?
 			spawnTimer += Time.deltaTime;
-		else if (TruckController.Instance.IsMusicPlaying) //If there is a follower and the music is playing, destroy it for now.
+		else if (TruckController.Instance.IsMusicPlaying && GameController.Instance.timeLeft > despawnLimit)
 			currentFollower.DestroySelf(); //Does it need to be offscreen? or can we just do a poof?
 
 		if (spawnTimer >= spawnInterval)

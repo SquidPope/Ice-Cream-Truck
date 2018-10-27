@@ -10,6 +10,9 @@ public class MapController : MonoBehaviour
 	public int mapHeight = 7;
 	List<MapTile> mapTiles; //object pool (should we use an array? size is static.)
 
+	float offsetX = 1f;
+	float offsetZ = 1f;
+
 	static MapController instance;
 	public static MapController Instance
 	{
@@ -25,7 +28,7 @@ public class MapController : MonoBehaviour
 		}
 	}
 	
-	void Start()
+	void Awake()
 	{
 		mapTiles = new List<MapTile>();
 		GenerateMap();
@@ -55,6 +58,13 @@ public class MapController : MonoBehaviour
 				mapWidth = 2;
 		}
 
+		//Should be the same for all tiles
+		Renderer prefabRenderer = prefabs[0].GetComponent<Renderer>();
+		offsetX = prefabRenderer.bounds.extents.x * 2f;
+		offsetZ = prefabRenderer.bounds.extents.z * 2f;
+
+		Debug.Log("Bounds: " + prefabRenderer.bounds.extents);
+
 		float tileX = 0f;
 		float tileZ = 0f;
 
@@ -65,9 +75,6 @@ public class MapController : MonoBehaviour
 		}
 
 		GameObject prefab = prefabs[0];
-		
-		float offsetX = prefab.transform.localScale.x;
-		float offsetZ = prefab.transform.localScale.z;
 
 		//create a square map
 		for (int i = 0; i < mapWidth; i++)
@@ -79,24 +86,23 @@ public class MapController : MonoBehaviour
 				{
 					int rand = Random.Range(0, prefabs.Count);
 					prefab = prefabs[rand];
-
-					offsetX = prefab.transform.localScale.x;
-					offsetZ = prefab.transform.localScale.z;
 				}
 
 				GameObject tile = GameObject.Instantiate(prefab, new Vector3(tileX, 0f, tileZ), Quaternion.identity);
+
 				int flip = Random.Range(0, 2);
 				if (flip == 1)
 				{
 					tile.transform.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
 				}
-					
+
 				MapTile mapTile = tile.AddComponent<MapTile>();
 				mapTile.MapPos = new Vector2(i, j);
 				mapTiles.Add(mapTile);
 
 				//Change tilePos to next tile
 				tileX += offsetX;
+				Debug.Log("Next tile pos: " + tileX + ", 0, " + tileZ);
 			}
 			
 			tileZ += offsetZ;
@@ -107,6 +113,7 @@ public class MapController : MonoBehaviour
 
 	public void UpdateMap()
 	{
+		Debug.Log("Updating map");
 		MapTile truckTile = TruckController.Instance.CurrentTile;
 		if (truckTile == null || !mapTiles.Contains(truckTile))
 		{
@@ -129,7 +136,7 @@ public class MapController : MonoBehaviour
 			//Find the current right edge and calculate where the tile should move to.
 			MapTile edge = mapTiles.Find(x => x.MapPos.x == mapWidth - 1); //Just find the first one, they all have the same x.
 			float nextTileZ = edge.WorldPos.z;
-			nextTileZ += edge.transform.localScale.z;
+			nextTileZ += offsetZ;
 
 			for (int i = 0; i < mapTiles.Count; i++)
 			{
@@ -151,7 +158,7 @@ public class MapController : MonoBehaviour
 			//Find the current right edge and calculate where the tile should move to.
 			MapTile edge = mapTiles.Find(x => x.MapPos.x == 0); //Just find the first one, they all have the same x.
 			float nextTileZ = edge.WorldPos.z;
-			nextTileZ -= edge.transform.localScale.z;
+			nextTileZ -= offsetZ;
 			
 			for (int i = 0; i < mapTiles.Count; i++)
 			{
@@ -174,7 +181,7 @@ public class MapController : MonoBehaviour
 			//Find the current right edge and calculate where the tile should move to.
 			MapTile edge = mapTiles.Find(x => x.MapPos.y == mapHeight - 1); //Just find the first one, they all have the same x.
 			float nextTileX = edge.WorldPos.x;
-			nextTileX += edge.transform.localScale.x;
+			nextTileX += offsetX;
 
 			for (int i = 0; i < mapTiles.Count; i++)
 			{
@@ -196,7 +203,7 @@ public class MapController : MonoBehaviour
 			//Find the current right edge and calculate where the tile should move to.
 			MapTile edge = mapTiles.Find(x => x.MapPos.y == 0); //Just find the first one, they all have the same x.
 			float nextTileX = edge.WorldPos.x;
-			nextTileX -= edge.transform.localScale.x;
+			nextTileX -= offsetX;
 
 			for (int i = 0; i < mapTiles.Count; i++)
 			{
@@ -264,5 +271,23 @@ public class MapController : MonoBehaviour
 		center.y -= 1;
 
 		return center;
+	}
+
+	public Vector3 GetCenterPos()
+	{
+		Vector3 pos = Vector3.zero;
+
+		Vector2 tileID = GetMapCenter();
+		MapTile tile = mapTiles.Find(x => x.MapPos == tileID);
+		
+		if (tile != null)
+			pos = tile.WorldPos;
+		else
+			Debug.Log("PANIC PANIC PANIC");
+
+		Debug.Log("Center ID: " + tileID);
+		Debug.Log("Center world position: " + pos);
+
+		return pos;
 	}
 }

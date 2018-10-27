@@ -66,6 +66,17 @@ public class TruckController : MonoBehaviour
 
 		audioSource.volume = XMLController.Instance.Options.volume;
 		audioSource.Pause();
+
+		//Position the Truck above the center tile of the map.
+		Vector3 startPos = MapController.Instance.GetCenterPos();
+		transform.position = new Vector3(startPos.x, transform.position.y, startPos.z);
+	}
+
+	public void MakeTiny()
+	{
+		//ToDo: add aditional effects
+		gameObject.transform.localScale = gameObject.transform.localScale * 0.1f;
+		maxSpeed += 30f;
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -181,7 +192,8 @@ public class TruckController : MonoBehaviour
 			else
 			{
 				audioSource.UnPause();
-				//chance to play 'weird' version
+				//ToDo: chance to play 'weird' version
+				GameController.Instance.StopSecretTimer();
 			}
 		}
 	}

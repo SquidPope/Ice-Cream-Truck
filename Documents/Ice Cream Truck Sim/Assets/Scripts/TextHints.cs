@@ -22,11 +22,11 @@ public class TextHints : MonoBehaviour
 
 	void ShowHint()
 	{
+		if (GameController.Instance.State == GameState.GameOver || GameController.Instance.State == GameState.Paused)
+			return;
+
 		int rand = Random.Range(0, hints.Length);
 
-		//ToDo: Fade text out over time (fade in too?)
-		//ToDo: Randomize font size? or change per hint?
-		//ToDo: Don't display if game is over 
 		hintText.text = hints[rand];
 
 		isShowingHint = true;
@@ -51,8 +51,6 @@ public class TextHints : MonoBehaviour
 		}
 		else
 		{
-			//check game timer?
-
 			if (Input.GetMouseButtonUp(0) && !TruckController.Instance.IsMusicPlaying)
 			{
 				ShowHint();

@@ -22,15 +22,16 @@ public class Follower : MonoBehaviour
 		float vel = TruckController.Instance.Velocity;
 		gameObject.transform.LookAt(TruckController.Instance.transform);
 
-		//ToDo: Slow to stop, and then reverse when player gets too close
 		if (Vector3.Distance(TruckController.Instance.transform.position, transform.position) <= followDist)
 		{
-			rigidbody.velocity = -transform.forward * 10f;//(TruckController.Instance.Acceleration * 10f);
+			rigidbody.velocity = -transform.forward * 10f;
 		}
 		else
 		{
 			rigidbody.velocity = transform.forward * vel;
-		}	
+		}
+
+		//ToDo: mesure distance to player, despawn if we get too far away.
 	}
 
 	public void DestroySelf()

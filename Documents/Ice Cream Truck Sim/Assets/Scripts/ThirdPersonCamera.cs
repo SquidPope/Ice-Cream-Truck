@@ -18,7 +18,6 @@ public class ThirdPersonCamera : MonoBehaviour
 	public float distanceMax = 13f;
 
     //HandlePlayerInput
-    float baseMouseSensitivity = 1f;
     float mouseSensitivityMultiplier = 2f;
 	public float XmouseSensitivity = 5f;
 	public float YmouseSensitivity = 5f;
@@ -62,11 +61,17 @@ public class ThirdPersonCamera : MonoBehaviour
 
 	void Start()
 	{
-		//ToDo: Get Mouse Sensitivity from XMLController.
+		ChangeMouseSensitivity(XMLController.Instance.Options.mouseSensitivity);
 		distance = Mathf.Clamp(distance, distanceMin, distanceMax);
 		startDistance = distance;
 		Reset();
 	}
+
+	public void ChangeMouseSensitivity(float sensitivity)
+    {
+        XmouseSensitivity = sensitivity;
+        YmouseSensitivity = sensitivity;
+    }
 
 	void HandlePlayerInput()
 	{
@@ -271,7 +276,6 @@ public class ThirdPersonCamera : MonoBehaviour
 
 			cameraScriptInstance.targetLookAt = tempLookAt.transform;
 		}
-		Debug.Log("target parent: " + cameraScriptInstance.targetLookAt.parent.gameObject.name);
 	}
 
 	public static float ClampAngle(float angle, float min, float max)

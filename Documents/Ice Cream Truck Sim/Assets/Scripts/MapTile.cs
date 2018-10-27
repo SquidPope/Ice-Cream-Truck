@@ -9,6 +9,8 @@ public class MapTile : MonoBehaviour
 	Messages[] messageComponents;
 	bool hasMessages = false;
 
+	public Vector3 worldPos;
+
 	public Vector2 MapPos
 	{
 		get { return mapPos; }
@@ -30,6 +32,8 @@ public class MapTile : MonoBehaviour
 		messageComponents = gameObject.transform.GetComponentsInChildren<Messages>();
 		if (messageComponents.Length > 0)
 			hasMessages = true;
+
+		worldPos = transform.position;
 	}
 
 	public void RandomizeMessages()

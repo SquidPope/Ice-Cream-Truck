@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour
 			}
 			else if (value == 3) //The timing should work as long as they start the sale within 10 seconds of the delay.
 			{
-				if (secretTimer >= secretDelay && secretTimer <= secretDelay + iceCreamDelay + 10f && !TruckController.Instance.IsMusicPlaying)
+				if (isTimingSecret && secretTimer >= secretDelay && secretTimer <= secretDelay + iceCreamDelay + 10f && !TruckController.Instance.IsMusicPlaying)
 				{
 					SceneManager.LoadScene("elsewhere");
 				}
@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour
 				isTimingSecret = false;
 			}
 
-			HUDController.Instance.SecretDisplay(isTimingSecret);
+			//HUDController.Instance.SecretDisplay(isTimingSecret);
 
 			score = value;
 		}
@@ -114,7 +114,18 @@ public class GameController : MonoBehaviour
 		{
 			State = GameState.Playing;
 			UIController.Instance.UpdateUI();
+
+			int rand = Random.Range(0, 21);
+			if (rand == 0f)
+				TruckController.Instance.MakeTiny();
 		}
+
+		
+	}
+
+	public void StopSecretTimer()
+	{
+		isTimingSecret = false;
 	}
 	
 	// Update is called once per frame

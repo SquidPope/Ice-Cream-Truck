@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -187,6 +187,52 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 141845248}
+--- !u!1001 &257370003
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1984734264356082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
+      propertyPath: m_Name
+      value: iceCreamTruck_Materials
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &287334321
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,12 +335,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 1175155253482150, guid: bf3fac73bfbd055459b9dd4cdfd6fb41, type: 2}
-  - {fileID: 1704445483431734, guid: 5cb9b4443a022014b9a97dacbec11d07, type: 2}
-  - {fileID: 1672210481793360, guid: 9f3bdfc0b4b53604a9966af3184e822e, type: 2}
-  - {fileID: 1712689736175256, guid: efbee0c2d557e8445895bbfb02ac5345, type: 2}
-  mapWidth: 25
-  mapHeight: 25
+  - {fileID: 1986103178187312, guid: 9dd651cea5f5ca143abb1709baa0e65e, type: 2}
+  - {fileID: 1986103178187312, guid: 9dd651cea5f5ca143abb1709baa0e65e, type: 2}
+  - {fileID: 1776678371455726, guid: de99a371fb5bfce4284143f7b16f0c50, type: 2}
+  - {fileID: 1845689323423106, guid: 7d9fb73ee22955c428c98c3414bc892b, type: 2}
+  mapWidth: 15
+  mapHeight: 15
 --- !u!4 &317500792
 Transform:
   m_ObjectHideFlags: 0
@@ -430,7 +476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.886}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -825,7 +871,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.6657201, b: 0.24264705, a: 1}
+  m_Color: {r: 1, g: 0.8344828, b: 0.625, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -1284,52 +1330,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1467035265}
---- !u!1001 &1599758523
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4626468985585398, guid: c905c780166040f4199f552e88195c8a, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4626468985585398, guid: c905c780166040f4199f552e88195c8a, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4626468985585398, guid: c905c780166040f4199f552e88195c8a, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4626468985585398, guid: c905c780166040f4199f552e88195c8a, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4626468985585398, guid: c905c780166040f4199f552e88195c8a, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4626468985585398, guid: c905c780166040f4199f552e88195c8a, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4626468985585398, guid: c905c780166040f4199f552e88195c8a, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4626468985585398, guid: c905c780166040f4199f552e88195c8a, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1044888053093112, guid: c905c780166040f4199f552e88195c8a, type: 2}
-      propertyPath: m_Name
-      value: iceCreamTruck_unityTestl
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: c905c780166040f4199f552e88195c8a, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1629535047
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,7 +1439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1860,8 +1860,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d09097c4ecf990b498e0fdc02dd50bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1487425681262650, guid: 5d7d1bf861fd7344a9802013d6b30aea, type: 2}
-  distance: 5
+  prefab: {fileID: 1148082909552232, guid: 012d279fd933041408a58fb664c8c3c5, type: 2}
+  distance: 15
 --- !u!4 &1971384201
 Transform:
   m_ObjectHideFlags: 0
@@ -1923,7 +1923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.627451, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2010,7 +2010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.453, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
