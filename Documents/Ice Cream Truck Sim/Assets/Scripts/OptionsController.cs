@@ -9,6 +9,7 @@ public class OptionsController : MonoBehaviour
 	public Slider volume;
 	public Slider mouseSensitivity;
 	public Dropdown resolutionDropdown;
+	public Slider screenBrightness;
 
 	OptionsData options;
 
@@ -35,6 +36,7 @@ public class OptionsController : MonoBehaviour
 		
 		volume.value = options.volume;
 		mouseSensitivity.value = options.mouseSensitivity;
+		screenBrightness.value = options.screenBrightness;
 
 		int resolutionIndex = -1;
 		foreach (Resolution r in Screen.resolutions)
@@ -43,7 +45,7 @@ public class OptionsController : MonoBehaviour
 			Dropdown.OptionData option = new Dropdown.OptionData(name);
 
 			//Check for duplicates, because there should be some with different refresh rates.
-			if (!resolutionDropdown.options.Contains(option))
+			if (resolutionDropdown.options.Find(x => x.text == name) == null)
 				resolutionDropdown.options.Add(option);
 			else
 				continue;
@@ -52,8 +54,12 @@ public class OptionsController : MonoBehaviour
 				resolutionIndex = resolutionDropdown.options.Count - 1;
 		}
 
+		//If the current resolution is not on the list for some reason, add it.
 		if (resolutionIndex == -1)
-			resolutionIndex = resolutionDropdown.options.Count - 1; //Default resolution is set to Native Resolution, which is usually the largest one available.
+		{
+			resolutionDropdown.options.Add(new Dropdown.OptionData(options.screenResolution.width + " X " + options.screenResolution.height));
+			resolutionIndex = resolutionDropdown.options.Count - 1;
+		}
 
 		resolutionDropdown.value = resolutionIndex;
 	}
@@ -86,12 +92,15 @@ public class OptionsController : MonoBehaviour
 		options.screenResolution = selected;
 	}
 
+	public void OnBrightnessChange(float value)
+	{
+		options.screenBrightness = value;
+	}
+
 	public void OnOptionsExit()
 	{
 		if (Camera.main.GetComponent<ThirdPersonCamera>()) //ToDo: Find a cheaper and cleaner way to do this.
 			Camera.main.GetComponent<ThirdPersonCamera>().ChangeMouseSensitivity(options.mouseSensitivity);
-
-		//if AudioController exists, update volume
 
 		XMLController.Instance.Options = options;
 		XMLController.Instance.Save();

@@ -111,6 +111,7 @@ public class GameController : MonoBehaviour
 		
 		timeLeft = timeLimit;
 
+		AudioController.Instance.Init();
 		string levelName = SceneManager.GetActiveScene().name;
 
 		if (levelName == "elsewhere")

@@ -9,6 +9,7 @@ public class MainMenuController : MonoBehaviour
 	public Image mainPanel;
 	public Text highScore;
 	public Image optionsPanel;
+	public Image creditsPanel;
 	string highScoreText = "Player High Score: ";
 
 	void Start()
@@ -17,7 +18,8 @@ public class MainMenuController : MonoBehaviour
 		Cursor.visible = true;
 
 		highScore.text = highScoreText + XMLController.Instance.GetHighScore();
-		ToggleOptionsPanel(false);
+		TogglePanel(optionsPanel, false);
+		TogglePanel(creditsPanel, false);
 	}
 
 	public void OnStartPressed()
@@ -35,38 +37,41 @@ public class MainMenuController : MonoBehaviour
 
 	public void OnOptionsPressed()
 	{
-		ToggleMainPanel(false);
-
-		//ToDo: Rotate over time
-		Camera.main.transform.Rotate(0f, 90f, 0f);
-		
-		ToggleOptionsPanel(true);
+		TogglePanel(mainPanel, false);
+		TogglePanel(optionsPanel, true);
 		
 	}
 
 	public void OnOptionsBackPressed()
 	{
-		ToggleOptionsPanel(false);
-
-		Camera.main.transform.Rotate(0f, -90f, 0f);
-
-		ToggleMainPanel(true);
+		TogglePanel(optionsPanel, false);
+		TogglePanel(mainPanel, true);
 	}
 
-	void ToggleMainPanel(bool isOn)
+	public void OnCreditsPressed()
 	{
-		mainPanel.gameObject.SetActive(isOn);
-		for (int i = 0; i < mainPanel.transform.childCount; i++)
+		TogglePanel(mainPanel, false);
+		TogglePanel(creditsPanel, true);
+	}
+
+	public void OnCreditsBackPressed()
+	{
+		TogglePanel(creditsPanel, false);
+		TogglePanel(mainPanel, true);
+	}
+
+	void TogglePanel(Image panel, bool isOn)
+	{
+		panel.gameObject.SetActive(isOn);
+		for (int i = 0; i < panel.transform.childCount; i++)
 		{
-			mainPanel.transform.GetChild(i).gameObject.SetActive(isOn);
+			panel.transform.GetChild(i).gameObject.SetActive(isOn);
 		}
 	}
-	void ToggleOptionsPanel(bool isOn)
+
+	void Update()
 	{
-		optionsPanel.gameObject.SetActive(isOn);
-		for (int i = 0; i < optionsPanel.transform.childCount; i++)
-		{
-			optionsPanel.transform.GetChild(i).gameObject.SetActive(isOn);
-		}
+		if (Input.GetKeyUp(KeyCode.Escape))
+			Application.Quit();
 	}
 }

@@ -187,57 +187,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 141845248}
---- !u!1001 &257370003
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4136481059642082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1984734264356082, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
-      propertyPath: m_Name
-      value: iceCreamTruck_Materials
-      objectReference: {fileID: 0}
-    - target: {fileID: 82382108422488838, guid: 43c4a55f36caf4c47acd492acb730b2a,
-        type: 2}
-      propertyPath: m_PlayOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &287334321
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +292,11 @@ MonoBehaviour:
   - {fileID: 1986103178187312, guid: 9dd651cea5f5ca143abb1709baa0e65e, type: 2}
   - {fileID: 1986103178187312, guid: 9dd651cea5f5ca143abb1709baa0e65e, type: 2}
   - {fileID: 1776678371455726, guid: de99a371fb5bfce4284143f7b16f0c50, type: 2}
+  - {fileID: 1031780767586598, guid: 6222aa5179dfb134d8e89185cfe0d644, type: 2}
+  - {fileID: 1031780767586598, guid: 6222aa5179dfb134d8e89185cfe0d644, type: 2}
   - {fileID: 1845689323423106, guid: 7d9fb73ee22955c428c98c3414bc892b, type: 2}
+  prefabToCut: {fileID: 1845689323423106, guid: 7d9fb73ee22955c428c98c3414bc892b,
+    type: 2}
   mapWidth: 15
   mapHeight: 15
 --- !u!4 &317500792
@@ -860,6 +813,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1374343895}
   - component: {fileID: 1374343894}
+  - component: {fileID: 1374343896}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -916,6 +870,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 30, y: -30.000002, z: 0}
+--- !u!114 &1374343896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1374343893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b43afaae6fda344ac7baa831fbd420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1389679191
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,6 +1651,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 10}
   m_SizeDelta: {x: 90, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1873539615
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4470098752941738, guid: 0d687f05a866cd844a826ad7740b98be, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470098752941738, guid: 0d687f05a866cd844a826ad7740b98be, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 196.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470098752941738, guid: 0d687f05a866cd844a826ad7740b98be, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1.506
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470098752941738, guid: 0d687f05a866cd844a826ad7740b98be, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470098752941738, guid: 0d687f05a866cd844a826ad7740b98be, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470098752941738, guid: 0d687f05a866cd844a826ad7740b98be, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470098752941738, guid: 0d687f05a866cd844a826ad7740b98be, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470098752941738, guid: 0d687f05a866cd844a826ad7740b98be, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797129765835006, guid: 0d687f05a866cd844a826ad7740b98be, type: 2}
+      propertyPath: m_Name
+      value: iceCreamTruck_Materials 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0d687f05a866cd844a826ad7740b98be, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1910445989
 GameObject:
   m_ObjectHideFlags: 0

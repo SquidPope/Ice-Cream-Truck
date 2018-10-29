@@ -24,7 +24,7 @@ public class AudioController : MonoBehaviour
 		}
 	}
 
-	void Start()
+	public void Init()
 	{
 		source = gameObject.GetComponent<AudioSource>();
 		source.volume = 0.3f;

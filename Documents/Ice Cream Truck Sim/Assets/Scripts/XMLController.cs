@@ -13,6 +13,7 @@ public class OptionsData
 	public float mouseSensitivity;
 	public Resolution screenResolution;
 	public bool fullscreen;
+	public float screenBrightness;
 
 	public OptionsData()
 	{
@@ -20,8 +21,9 @@ public class OptionsData
 		volume = 1f;
 		mouseSensitivity = 1f;
 
-		screenResolution = Screen.resolutions[Screen.resolutions.Length - 1];
+		screenResolution = Screen.currentResolution; //Need to change this for Linux build, it works differently.
 		fullscreen = true;
+		screenBrightness = 0.5f;
 	}
 }
 public class SaveData

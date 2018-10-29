@@ -18,7 +18,6 @@ public class ThirdPersonCamera : MonoBehaviour
 	public float distanceMax = 13f;
 
     //HandlePlayerInput
-    float mouseSensitivityMultiplier = 2f;
 	public float XmouseSensitivity = 5f;
 	public float YmouseSensitivity = 5f;
 	public float mouseWheelSensitivity = 5f;

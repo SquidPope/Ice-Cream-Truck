@@ -5,6 +5,7 @@ using UnityEngine;
 public class MapController : MonoBehaviour
 {
 	public List<GameObject> prefabs;
+	public GameObject prefabToCut;
 
 	public int mapWidth = 7;
 	public int mapHeight = 7;
@@ -38,6 +39,13 @@ public class MapController : MonoBehaviour
 		Vector3 truckPos = mapTiles.Find(x => x.MapPos == mapCenter).WorldPos;
 		truckPos.y += 2f;
 		TruckController.Instance.WorldPos = truckPos;
+
+		//If the map size is really small, remove a prefab with walls in it so the player doesn't get stuck.
+		if (XMLController.Instance.Options.mapSize <= 10)
+		{
+			if (prefabToCut != null && prefabs.Contains(prefabToCut))
+				prefabs.Remove(prefabToCut);
+		}
 	}
 
 	void GenerateMap()
@@ -124,9 +132,6 @@ public class MapController : MonoBehaviour
 		//find center tile, compare x and y to truckTile
 		Vector2 mapCenter = GetMapCenter();
 
-		//ToDo: Figure out why moving a tile will always mean the truck is offset from the center by x AND y
-
-		List<MapTile> column = mapTiles.FindAll(x => x.MapPos.x == truckTile.MapPos.x);
 		if (truckTile.MapPos.x > mapCenter.x)
 		{
 			//Find the current right edge and calculate where the tile should move to.
