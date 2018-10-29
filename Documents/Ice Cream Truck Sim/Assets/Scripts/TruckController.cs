@@ -6,6 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class TruckController : MonoBehaviour
 {
+	public AudioClip alternateMusic;
+	public AudioClip echoMusic;
+
+	AudioClip originalMusic;
+
 	new Rigidbody rigidbody;
 	AudioSource audioSource;
 
@@ -14,7 +19,6 @@ public class TruckController : MonoBehaviour
 	float maxSpeed = 10f; //ToDo: maxSpeed should increase as time runs out, or as "Spookiness" increases
 	float turnRate = 2f;
 	float idleDecrease = 0.01f;
-	float gravity = 2f;
 
 	GameObject currentTile;
 
@@ -64,6 +68,7 @@ public class TruckController : MonoBehaviour
 		rigidbody = gameObject.GetComponent<Rigidbody>();
 		audioSource = gameObject.GetComponent<AudioSource>();
 
+		originalMusic = audioSource.clip;
 		audioSource.volume = XMLController.Instance.Options.volume;
 		audioSource.Pause();
 
@@ -74,9 +79,10 @@ public class TruckController : MonoBehaviour
 
 	public void MakeTiny()
 	{
-		//ToDo: add aditional effects
 		gameObject.transform.localScale = gameObject.transform.localScale * 0.1f;
 		maxSpeed += 30f;
+		originalMusic = alternateMusic;
+		audioSource.clip = originalMusic;
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -89,7 +95,7 @@ public class TruckController : MonoBehaviour
 			{
 				if (c.otherCollider.tag == "Follower")
 				{
-					//ToDo: something, idk
+					GameController.Instance.State = GameState.GameOver;
 					return;
 				}
 				else if (c.otherCollider.tag == "Tile")
@@ -191,10 +197,26 @@ public class TruckController : MonoBehaviour
 			}
 			else
 			{
-				audioSource.UnPause();
-				//ToDo: chance to play 'weird' version
-				GameController.Instance.StopSecretTimer();
+				if (GameController.Instance.State == GameState.Secret)
+				{
+					audioSource.clip = alternateMusic;
+				}
+					
+				else
+				{
+					GameController.Instance.StopSecretTimer();
+
+					int rand = Random.Range(0, 10);
+					if (rand == 0)
+						audioSource.clip = echoMusic;
+					else
+						audioSource.clip = originalMusic;
+				}
+				
+				audioSource.Play();
 			}
+
+			AudioController.Instance.ToggleSound(!audioSource.isPlaying);
 		}
 	}
 }

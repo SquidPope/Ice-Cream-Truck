@@ -63,8 +63,6 @@ public class MapController : MonoBehaviour
 		offsetX = prefabRenderer.bounds.extents.x * 2f;
 		offsetZ = prefabRenderer.bounds.extents.z * 2f;
 
-		Debug.Log("Bounds: " + prefabRenderer.bounds.extents);
-
 		float tileX = 0f;
 		float tileZ = 0f;
 
@@ -102,7 +100,6 @@ public class MapController : MonoBehaviour
 
 				//Change tilePos to next tile
 				tileX += offsetX;
-				Debug.Log("Next tile pos: " + tileX + ", 0, " + tileZ);
 			}
 			
 			tileZ += offsetZ;
@@ -113,7 +110,6 @@ public class MapController : MonoBehaviour
 
 	public void UpdateMap()
 	{
-		Debug.Log("Updating map");
 		MapTile truckTile = TruckController.Instance.CurrentTile;
 		if (truckTile == null || !mapTiles.Contains(truckTile))
 		{
@@ -282,11 +278,6 @@ public class MapController : MonoBehaviour
 		
 		if (tile != null)
 			pos = tile.WorldPos;
-		else
-			Debug.Log("PANIC PANIC PANIC");
-
-		Debug.Log("Center ID: " + tileID);
-		Debug.Log("Center world position: " + pos);
 
 		return pos;
 	}

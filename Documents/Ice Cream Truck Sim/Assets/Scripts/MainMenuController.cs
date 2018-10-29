@@ -13,10 +13,11 @@ public class MainMenuController : MonoBehaviour
 
 	void Start()
 	{
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
+
 		highScore.text = highScoreText + XMLController.Instance.GetHighScore();
 		ToggleOptionsPanel(false);
-
-		//ToDo: Load options, set UI values.
 	}
 
 	public void OnStartPressed()

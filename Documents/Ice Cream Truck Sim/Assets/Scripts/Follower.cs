@@ -7,7 +7,7 @@ public class Follower : MonoBehaviour
 {
 	new Rigidbody rigidbody;
 
-	float followDist = 1f;
+	float followDist = 5f;
 
 	void Start()
 	{

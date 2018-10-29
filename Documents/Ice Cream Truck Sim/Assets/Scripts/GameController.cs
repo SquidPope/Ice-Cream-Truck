@@ -47,8 +47,16 @@ public class GameController : MonoBehaviour
 
 			//We only want to save if the game ended, or we got to the secret area, not every time we Pause/Resume.
 			if (state == GameState.GameOver || state == GameState.Secret)
-				if (GameObject.FindGameObjectWithTag("XMLController") != null) //ToDo: Remove for final release, this is just for starting from a given level instead of the main menu.
-					XMLController.Instance.Save();
+			{
+				AudioController.Instance.ToggleSound(false);
+				XMLController.Instance.Save();
+			}
+
+			if (state == GameState.GameOver)
+					Cursor.visible = true;
+			else
+				Cursor.visible = false;
+				
 		}
 	}
 
@@ -133,24 +141,10 @@ public class GameController : MonoBehaviour
 	{
 		if (Input.GetKeyUp(KeyCode.Escape))
 		{
-			if (state == GameState.Paused)
-			{
-				//Play
-			}
-			else if (state == GameState.Playing || state == GameState.Secret)
-			{
-				//Pause
+			if (state == GameState.GameOver)
+				XMLController.Instance.Save();
 
-				if (GameObject.FindGameObjectWithTag("XMLController") != null) //ToDo: Remove for final release, this is just for starting from a given level instead of the main menu.
-					XMLController.Instance.Save();
-
-				//ToDo: Remove after pause is implemented.
-				Application.Quit();
-			}
-			else if (state == GameState.GameOver)
-			{
-				//Load main menu?
-			}
+			SceneManager.LoadScene("mainMenu");
 		}
 
 		if (State == GameState.Playing)
@@ -164,7 +158,6 @@ public class GameController : MonoBehaviour
 			if (timeLeft <= 0)
 			{
 				state = GameState.GameOver;
-				//ToDo: Slow/Stop Truck
 			}
 
 			if (truckInZone)
@@ -183,7 +176,6 @@ public class GameController : MonoBehaviour
 							{
 								Score++;
 								hasSoldIceCream = true;
-								//ToDo:Make iceCreamDelay longer every time.
 								iceCreamProgress = 0f;
 							}
 						}
@@ -198,21 +190,10 @@ public class GameController : MonoBehaviour
 
 			UIController.Instance.UpdateUI();
 		}
-		else if (State == GameState.Paused)
-		{
-			UIController.Instance.UpdateUI();
-		}
 		else if (State == GameState.Secret)
 		{
 			timeLeft -= Time.deltaTime;
 			HUDController.Instance.UpdateHUD();
-		}
-		else if (state == GameState.GameOver)
-		{
-			if (Input.GetKeyUp(KeyCode.Escape))
-			{
-				SceneManager.LoadScene("mainMenu");
-			}
 		}
 
 		

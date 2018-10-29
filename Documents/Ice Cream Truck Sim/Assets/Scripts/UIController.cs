@@ -36,6 +36,9 @@ public class UIController : MonoBehaviour
 
 	void Start()
 	{
+		Cursor.lockState = CursorLockMode.Confined;
+		Cursor.visible = false;
+		
 		iceCreamSaleProgress.maxValue = GameController.Instance.iceCreamDelay;
 
 		//Force the Slider's max value to be greater than 0.

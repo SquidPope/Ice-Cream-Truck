@@ -11,12 +11,17 @@ public class OptionsData
 	public int mapSize; //ToDo: is there a reason to make this a Vector2?
 	public float volume;
 	public float mouseSensitivity;
+	public Resolution screenResolution;
+	public bool fullscreen;
 
 	public OptionsData()
 	{
 		mapSize = 5;
 		volume = 1f;
 		mouseSensitivity = 1f;
+
+		screenResolution = Screen.resolutions[Screen.resolutions.Length - 1];
+		fullscreen = true;
 	}
 }
 public class SaveData

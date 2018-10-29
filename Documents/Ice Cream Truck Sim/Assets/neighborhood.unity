@@ -230,6 +230,11 @@ Prefab:
       propertyPath: m_Name
       value: iceCreamTruck_Materials
       objectReference: {fileID: 0}
+    - target: {fileID: 82382108422488838, guid: 43c4a55f36caf4c47acd492acb730b2a,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43c4a55f36caf4c47acd492acb730b2a, type: 2}
   m_IsPrefabParent: 0

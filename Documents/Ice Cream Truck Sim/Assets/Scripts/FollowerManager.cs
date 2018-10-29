@@ -60,7 +60,9 @@ public class FollowerManager : MonoBehaviour
 			}
 		}
 
-		//ToDo: Despawn for some reason (Music on? timer?)		
+		if (GameController.Instance.State == GameState.GameOver)
+			if (currentFollower != null)
+				currentFollower.DestroySelf();	
 	}
 
 	bool IsPointOffScreen(Vector3 worldPos)
