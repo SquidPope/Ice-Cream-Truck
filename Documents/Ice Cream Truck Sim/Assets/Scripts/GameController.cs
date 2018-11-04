@@ -52,10 +52,17 @@ public class GameController : MonoBehaviour
 				XMLController.Instance.Save();
 			}
 
-			if (state == GameState.GameOver)
+			if (state == GameState.GameOver) //ToDo: When in game pause is added, GameState.Paused should do this too.
+			{
 					Cursor.visible = true;
+					Cursor.lockState = CursorLockMode.None;
+			}
 			else
+			{
 				Cursor.visible = false;
+				Cursor.lockState = CursorLockMode.Confined;
+			}
+				
 				
 		}
 	}
@@ -128,8 +135,6 @@ public class GameController : MonoBehaviour
 			if (rand == 0f)
 				TruckController.Instance.MakeTiny();
 		}
-
-		
 	}
 
 	public void StopSecretTimer()
@@ -142,10 +147,13 @@ public class GameController : MonoBehaviour
 	{
 		if (Input.GetKeyUp(KeyCode.Escape))
 		{
-			if (state == GameState.GameOver)
+			if (State == GameState.GameOver)
 				XMLController.Instance.Save();
 
-			SceneManager.LoadScene("mainMenu");
+			if (State == GameState.Secret)
+				SceneManager.LoadScene("mainMenuSecret");
+			else
+				SceneManager.LoadScene("mainMenu");
 		}
 
 		if (State == GameState.Playing)
@@ -158,7 +166,7 @@ public class GameController : MonoBehaviour
 			timeLeft -= Time.deltaTime;
 			if (timeLeft <= 0)
 			{
-				state = GameState.GameOver;
+				State = GameState.GameOver;
 			}
 
 			if (truckInZone)

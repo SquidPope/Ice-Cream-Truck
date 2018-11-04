@@ -24,7 +24,7 @@ public class MainMenuController : MonoBehaviour
 
 	public void OnStartPressed()
 	{
-		if (XMLController.Instance.GetSecretStatus())
+		if (XMLController.Instance.GetSecretStatus() == 1)
 			SceneManager.LoadScene("elsewhere");
 		else
 			SceneManager.LoadScene("neighborhood");

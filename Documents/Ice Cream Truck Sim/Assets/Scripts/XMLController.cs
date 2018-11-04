@@ -17,11 +17,11 @@ public class OptionsData
 
 	public OptionsData()
 	{
-		mapSize = 5;
+		mapSize = 25;
 		volume = 1f;
 		mouseSensitivity = 1f;
 
-		screenResolution = Screen.currentResolution; //Need to change this for Linux build, it works differently.
+		screenResolution = Screen.currentResolution; //ToDo: Change this for Linux build, it works differently.
 		fullscreen = true;
 		screenBrightness = 0.5f;
 	}
@@ -29,13 +29,13 @@ public class OptionsData
 public class SaveData
 {
 	public int highScore;
-	public bool isSecret;
+	public int mcfAdo;
 	public OptionsData options;
 
 	public SaveData()
 	{
 		highScore = 0;
-		isSecret = false;
+		mcfAdo = 0;
 
 		options = new OptionsData();
 	}
@@ -84,9 +84,9 @@ public class XMLController : MonoBehaviour
 		return save.highScore;
 	}
 
-	public bool GetSecretStatus()
+	public int GetSecretStatus()
 	{
-		return save.isSecret;
+		return save.mcfAdo;
 	}
 
 	public int GetMapSize()
@@ -102,7 +102,7 @@ public class XMLController : MonoBehaviour
 
 		Load();
 
-		if (save.isSecret && SceneManager.GetActiveScene().name == "mainMenu")
+		if (save.mcfAdo == 1 && SceneManager.GetActiveScene().name == "mainMenu")
 			SceneManager.LoadScene("mainMenuSecret");
 	}
 
@@ -116,7 +116,8 @@ public class XMLController : MonoBehaviour
 			if (GameController.Instance.Score > save.highScore)
 				save.highScore = GameController.Instance.Score;
 
-			save.isSecret = GameController.Instance.State == GameState.Secret;
+			if (GameController.Instance.State == GameState.Secret)
+				save.mcfAdo = 1;
 		}
 
 		using (FileStream stream = new FileStream(path, FileMode.Create))

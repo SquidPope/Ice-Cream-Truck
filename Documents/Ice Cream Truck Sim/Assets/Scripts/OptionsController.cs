@@ -22,14 +22,14 @@ public class OptionsController : MonoBehaviour
 		if (options == null)
 			options = new OptionsData();
 
-		mapSizeOptions = new List<int>{ 5, 10,  15, 25};
+		mapSizeOptions = new List<int>{ 5, 10,  15, 25, 40};
 
 		if (mapSizeOptions.Contains(options.mapSize))
 			mapSizeDropdown.value = mapSizeOptions.FindIndex(x => x == options.mapSize);
 		else if (options.mapSize < 100 && options.mapSize > 1) //If the player finds and edits the save file, I'll allow different map sizes but limit them to less than 100, more could crash their computer.
 			mapSizeOptions.Add(options.mapSize);
 		else
-			options.mapSize = mapSizeOptions[0];
+			options.mapSize = mapSizeOptions[3]; //Select the second largest map by default, I think it's the best compromise between looking good and running well for most computers.
 
 		mapSizeDropdown.AddOptions(mapSizeOptions.ConvertAll(x => x.ToString()));
 		mapSizeDropdown.value = mapSizeOptions.FindIndex(x => x == options.mapSize);
@@ -54,14 +54,15 @@ public class OptionsController : MonoBehaviour
 				resolutionIndex = resolutionDropdown.options.Count - 1;
 		}
 
-		//If the current resolution is not on the list for some reason, add it.
+		//If we haven't found the correct resolution, just use the largest one available.
 		if (resolutionIndex == -1)
 		{
-			resolutionDropdown.options.Add(new Dropdown.OptionData(options.screenResolution.width + " X " + options.screenResolution.height));
 			resolutionIndex = resolutionDropdown.options.Count - 1;
+			options.screenResolution = Screen.resolutions[resolutionIndex];
 		}
 
 		resolutionDropdown.value = resolutionIndex;
+		Screen.SetResolution(options.screenResolution.width, options.screenResolution.height, options.fullscreen);
 	}
 
 	public void OnMapSizeChange(int optionIndex)
